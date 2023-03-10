@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    Options -Indexes 
+    RewriteEngine On
+
+    # Remove www.
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ http://%1%{REQUEST_URI} [R=301,QSA,NC,L]
+
+    # Required to allow direct-linking of pages so they can be processed by Angular
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !index
+    RewriteRule (.*) index.html [L]
+</IfModule>
