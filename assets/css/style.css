@@ -1,0 +1,37 @@
+:root {
+    --white: #FFFFFF;
+    --black: #000000;
+    --brand-width: 200px;
+    --navbar-height: 80px;
+}
+.ob-navbar {
+    height: var(--navbar-height);
+    border-radius: 50px;
+    background-color: var(--white);
+    color: var(--black);
+    padding: 10px 25px;
+}
+.ob-navbar > .menu,
+.ob-navbar > .links {
+    width: calc((100% - var(--brand-width)) / 2);
+}
+.ob-navbar > .brand {
+    width: var(--brand-width);
+    text-align: center;
+}
+.ob-header > h2 {
+    position: relative;
+}
+.ob-header > h2::after {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    content: "";
+    right: -100px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 2px solid rgba(255, 255, 255, .3);
+    border-top: none;
+    border-left: none;
+}
