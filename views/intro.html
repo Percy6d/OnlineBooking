@@ -1,4 +1,90 @@
-<section class="xui-bg-pos-center xui-bg-sz-cover" style="background-image: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1000&q=60');">
+<nav class="xui-navbar xui-container" brand="true" layout="3" menu="2">
+    <div class="brand">
+        <a class="xui-text-dc-none xui-text-inherit" href="./">
+            <span class="xui-font-sz-110">onlinebooking.com</span>
+        </a>
+    </div>
+    <div class="links" placed="left">
+        <div class="main xui-bg-black">
+            <ul>
+                <li><a class="xui-font-sz-180 xui-md-font-sz-200 xui-lg-font-sz-220 xui-text-inherit" href="./">Home</a></li>
+                <li class="dropdown-menu">
+                    <a class="xui-font-sz-180 xui-md-font-sz-200 xui-lg-font-sz-220 xui-text-inherit" href="#">Company</a>
+                    <div class="dropdown xui-text-white xui-bdr-w-2 xui-bdr-s-solid xui-bdr-black">
+                        <ul>
+                            <li><a class="xui-font-sz-120 xui-md-font-sz-170 xui-lg-font-sz-180" href="who-we-are">Who We Are</a></li>
+                            <li><a class="xui-font-sz-120 xui-md-font-sz-170 xui-lg-font-sz-180" href="faqs">FAQs</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="dropdown-menu">
+                    <a class="xui-font-sz-180 xui-md-font-sz-200 xui-lg-font-sz-220 xui-text-inherit" href="#">Services</a>
+                    <div class="dropdown xui-text-white xui-bdr-w-2 xui-bdr-s-solid xui-bdr-black">
+                        <ul>
+                            <li ng-repeat="service in services"><a class="xui-font-sz-120 xui-md-font-sz-170 xui-lg-font-sz-180" ng-href="service/{{service.svc_uid}}">{{service.svc_name}}</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a class="xui-font-sz-180 xui-md-font-sz-200 xui-lg-font-sz-220 xui-text-inherit" href="works">Projects</a></li>
+                <li class="dropdown-menu">
+                    <a class="xui-font-sz-180 xui-md-font-sz-200 xui-lg-font-sz-220 xui-text-inherit" href="#">Specials</a>
+                    <div class="dropdown xui-text-white xui-bdr-w-2 xui-bdr-s-solid xui-bdr-black">
+                        <ul>
+                            <li><a class="xui-font-sz-120 xui-md-font-sz-170 xui-lg-font-sz-180" href="specials/events">Events</a></li>
+                            <li><a class="xui-font-sz-120 xui-md-font-sz-170 xui-lg-font-sz-180" href="specials/programs">Programs</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a class="xui-font-sz-180 xui-md-font-sz-200 xui-lg-font-sz-220 xui-text-inherit" href="blog">Blog</a></li>
+                <li><a class="xui-font-sz-180 xui-md-font-sz-200 xui-lg-font-sz-220 xui-text-inherit" href="dm">Contact</a></li>
+            </ul>
+        </div>
+        <div class="fixed">
+            <ul>
+                <li>
+                    <a href="login" class="xui-text-inherit" style="background-color: var(--green); color: var(--primary); padding: 15px 30px; font-weight: bold; font-size: 85%;">My account</a>
+                </li>
+            </ul>
+        </div>
+        <div class="menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
+
+<header class="xui-container xui-d-grid xui-grid-col-1 xui-lg-grid-col-2 xui-grid-gap-2 xui-py-3 xui-pos-relative">
+    <div>
+        <div class="xui-badge xui-badge-info xui-bdr-rad-5 xui-font-sz-80 xui-font-w-500">Artisan services available</div>
+        <h1 class="xui-font-sz-250 xui-lg-font-sz-400">Simple Booking. <br> Easy Savings.</h1>
+        <p class="xui-opacity-5 xui-w-fluid-85 xui-line-height-1-half">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi porro eum minima expedita adipisci quisquam iste saepe maxime animi nesciunt nemo nihil, culpa officiis.</p>
+        <button class="xui-btn xui-btn-blue xui-d-inline-flex xui-flex-ai-center xui-bdr-rad-5 xui-mt-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm3 6V5h-3v2h-2V5H9v2H7V5H4v4h16zm0 2H4v8h16v-8zM6 13h5v4H6v-4z"/></svg>
+            <span class="xui-d-inline-block xui-mx-1">Book a service</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"/></svg>
+        </button>
+    </div>
+    <div>
+        <img class="xui-img-400 xui-mx-auto" src="assets/images/header-img.png" alt="" srcset="">
+    </div>
+    <div id="circle">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="300px" height="300px" viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
+            <defs>
+                <path id="circlePath" d=" M 150, 150 m -60, 0 a 60,60 0 0,1 120,0 a 60,60 0 0,1 -120,0 "/>
+            </defs>
+            <circle cx="150" cy="100" r="75" fill="none"/>
+            <g>
+                <use xlink:href="#circlePath" fill="none"/>
+                <text fill="#000">
+                    <textPath xlink:href="#circlePath">Booking services is our priority here at booker</textPath>
+                </text>
+            </g>
+        </svg>
+    </div>
+</header>
+
+<!-- <section class="xui-bg-pos-center xui-bg-sz-cover" style="background-image: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1000&q=60');">
     <div class="xui-overlay">
         <div class="xui-p-1">
             <nav class="xui-d-flex ob-navbar xui-flex-ai-center xui-flex-jc-center">
@@ -43,4 +129,4 @@
             <p class="xui-font-sz-120">Book now your ideal <u>stay</u></p>
         </div>
     </div>
-</section>
+</section> -->
