@@ -94,3 +94,11 @@ header #circle {
     right: 0;
     /* transform: translateX(-50%); */
 }
+@media screen and (max-width: 768px) {
+    .xui-navbar .links ul li a {
+        color: var(--white);
+    }
+    .xui-navbar .menu.animate span {
+        background-color: var(--white);
+    }
+}
