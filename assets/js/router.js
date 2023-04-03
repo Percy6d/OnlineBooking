@@ -13,19 +13,13 @@ app.config(($routeProvider, $locationProvider) => {
         controller: "register-controller"
     })
     .when("/about", {
-        templateUrl: "views/about.html",
-        controller: "about-controller"
+        templateUrl: "views/about.html"
     })
     .when("/contact", {
-        templateUrl: "views/contact.html",
-        controller: "contact-controller"
+        templateUrl: "views/contact.html"
     })
     .when("/services", {
         templateUrl: "views/services.html",
-        controller: "services-controller"
-    })
-    .when("/service/car-rental", {
-        templateUrl: "test.html"
     })
     .otherwise({
         templateUrl: "page-not-found.html"
