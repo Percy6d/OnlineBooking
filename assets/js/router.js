@@ -8,6 +8,12 @@ app.config(($routeProvider, $locationProvider) => {
         templateUrl: "views/login.html",
         controller: "login-controller"
     })
+    .when("/register", {
+        templateUrl: "views/register.html"
+    })
+    .when("/service/car-rental", {
+        templateUrl: "test.html"
+    })
     .otherwise({
         templateUrl: "page-not-found.html"
     });
