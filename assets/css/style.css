@@ -94,6 +94,23 @@ header #circle {
     right: 0;
     /* transform: translateX(-50%); */
 }
+.xui-navbar .links ul li.active a {
+    position: relative;
+}
+.xui-navbar .links ul li.active a::after {
+    content: "";
+    width: 5px;
+    height: 5px;
+    background-color: var(--black);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.xui-navbar .links ul li.active a span {
+    opacity: 1 !important;
+}
 @media screen and (max-width: 768px) {
     .xui-navbar .links ul li a {
         color: var(--white);
