@@ -11,3 +11,20 @@ app.directive("customFooter", function(){
         templateUrl: "directives/footer.html"
     }
 });
+app.directive('showDuringResolve', function($rootScope, $timeout) {
+    return {
+        link: function(element) {
+            $rootScope.$on('$routeChangeStart', function () {
+                $rootScope.loaderStatus = true;
+            });
+            $rootScope.$on('$routeChangeSuccess', function () {
+                $timeout(function(){
+                    $rootScope.loaderStatus = false;
+                }, 500);
+            });
+            $rootScope.$on('$routeChangeError', function () {
+                $rootScope.loaderStatus = false;
+            });
+        }
+    };
+});

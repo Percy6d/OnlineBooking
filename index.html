@@ -16,6 +16,12 @@
 </head>
 <body class="xui-font-6">
 
+    <div ng-show="loaderStatus" show-during-resolve class="xui-loader ob-loader">
+        <div class="xui-loader-content">
+            <div class="ob-ripple"><div></div><div></div></div>
+        </div>
+    </div>
+
     <ng-view autoscroll="true"></ng-view>
     
     <script src="https://code.angularjs.org/1.8.2/angular.min.js"></script>
