@@ -170,6 +170,24 @@ header #circle {
     opacity: 0;
   }
 }
+.ob-service-overview > a,
+.ob-service-overview > p {
+    position: absolute;
+    left: 20px;
+    transition: .4s;
+}
+.ob-service-overview > a {
+    top: -100%;
+}
+.ob-service-overview > p {
+    bottom: -100%;
+}
+.ob-service-overview:hover > a {
+    top: 20px;
+}
+.ob-service-overview:hover > p {
+    bottom: 20px;
+}
 .ob-service-overview:hover > div {
     transition: .8s;
 }
