@@ -3,7 +3,7 @@
     <div class="xui-max-w-400 xui-w-fluid-100">
         <h2 class="xui-font-sz-175 xui-font-w-normal">Create an account</h2>
         <p class="xui-font-sz-90 xui-opacity-6 xui-mt-half">All it takes is 2 minutes to get an account with us.</p>
-        <form class="xui-form" name="createUserForm" layout="2" novalidate>
+        <form class="xui-form" name="createUserForm" layout="2" novalidate ng-submit="createUser()">
             <div class="xui-form-box">
                 <input ng-class="{'error': createUserForm.email.$touched && !createUserForm.email.$valid}" type="email" name="email" id="email" ng-model="user.emailAddress" placeholder="Your email address" minlength="5" maxlength="30" required>
                 <span ng-if="createUserForm.email.$touched && createUserForm.email.$error.required" class="xui-form-error-msg">Enter your email address</span>
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="xui-form-box">
-                <button class="xui-btn-block xui-btn-black" ng-disabled="!createUserForm.$valid || !agreement">Create Account</button>
+                <button class="xui-btn-block xui-btn-black" ng-disabled="!createUserForm.$valid || !agreement || isLoading">Create Account</button>
             </div>
             <div class="xui-text-center">
                 <p class="xui-font-sz-90">Already have an account? <a href="login">Sign in</a></p>
