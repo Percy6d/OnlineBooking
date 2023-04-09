@@ -1,28 +1,40 @@
 <section class="ob-form-full-info"></section>
 <section class="ob-form-full-height xui-container xui-py-3 xui-d-flex xui-flex-ai-center xui-flex-jc-center">
     <div class="xui-max-w-400 xui-w-fluid-100">
-        <h2 class="xui-font-sz-175 xui-font-w-normal">Register</h2>
-        <form class="xui-form" layout="2" action="#">
+        <h2 class="xui-font-sz-175 xui-font-w-normal">Create an account</h2>
+        <p class="xui-font-sz-90 xui-opacity-6 xui-mt-half">All it takes is 2 minutes to get an account with us.</p>
+        <form class="xui-form" name="createUserForm" layout="2" novalidate ng-submit="createUser()">
             <div class="xui-form-box">
-                <input type="email" name="email" id="email" placeholder="Your email address">
+                <input ng-class="{'error': createUserForm.email.$touched && !createUserForm.email.$valid}" type="email" name="email" id="email" ng-model="user.emailAddress" placeholder="Your email address" minlength="5" maxlength="30" required>
+                <span ng-if="createUserForm.email.$touched && createUserForm.email.$error.required" class="xui-form-error-msg">Enter your email address</span>
+                <span ng-if="createUserForm.email.$touched && createUserForm.email.$error.minlength" class="xui-form-error-msg">This field needs more character</span>
+                <span ng-if="createUserForm.email.$touched && createUserForm.email.$error.maxlength" class="xui-form-error-msg">This field has exceeded it's limits</span>
+                <span ng-if="createUserForm.email.$touched && createUserForm.email.$error.email" class="xui-form-error-msg">This field needs to be a valid email address</span>
             </div>
             <div class="xui-form-box">
-                <input type="password" name="password" id="password" placeholder="Enter your password">
+                <input ng-class="{'error': createUserForm.password.$touched && !createUserForm.password.$valid}" type="password" name="password" id="password" ng-model="user.password" placeholder="Enter a password" minlength="4" maxlength="20" required>
+                <span ng-if="createUserForm.password.$touched && createUserForm.password.$error.required" class="xui-form-error-msg">Enter a password</span>
+                <span ng-if="createUserForm.password.$touched && createUserForm.password.$error.minlength" class="xui-form-error-msg">This field needs more character</span>
+                <span ng-if="createUserForm.password.$touched && createUserForm.password.$error.maxlength" class="xui-form-error-msg">This field has exceeded it's limits</span>
             </div>
             <div class="xui-form-box">
-                <input type="phone" name="phone" id="phone" placeholder="Enter your phone number">
-            </div>
-            <div class="xui-form-box">
-                <input type="text" name="country" id="country" placeholder="Enter your Country">
+                <input ng-class="{'error': createUserForm.cpassword.$touched && !createUserForm.cpassword.$valid}" type="password" name="cpassword" id="cpassword" ng-model="cpassword" placeholder="Confirm your password" minlength="4" maxlength="20" required>
+                <span ng-if="createUserForm.cpassword.$touched && createUserForm.cpassword.$error.required" class="xui-form-error-msg">Confirm your password</span>
+                <span ng-if="createUserForm.cpassword.$touched && createUserForm.cpassword.$error.minlength" class="xui-form-error-msg">This field needs more character</span>
+                <span ng-if="createUserForm.cpassword.$touched && createUserForm.cpassword.$error.maxlength" class="xui-form-error-msg">This field has exceeded it's limits</span>
+                <span ng-if="createUserForm.cpassword.$touched && !createUserForm.cpassword.$error.required && !createUserForm.cpassword.$error.minlength && !createUserForm.cpassword.$error.maxlength && cpassword != user.password" class="xui-form-error-msg">Passwords must be the same</span>
             </div>
             <div class="xui-form-box xui-d-flex xui-flex-ai-center">
                 <div class="xui-toggle-switch">
-                    <input type="checkbox">
+                    <input type="checkbox" name="agreement" ng-model="agreement">
                     <div class="slider"></div>
+                </div>
+                <div style="width: calc(100% - 75px);">
+                    <span class="xui-d-inline-block xui-opacity-5 xui-font-sz-90 xui-ml-half">Toggling this on means you've acceped our terms and policy.</span>
                 </div>
             </div>
             <div class="xui-form-box">
-                <button class="xui-btn-block xui-btn-black" type="submit">Create Account</button>
+                <button class="xui-btn-block xui-btn-black" ng-disabled="!createUserForm.$valid || !agreement || isLoading">Create Account</button>
             </div>
             <div class="xui-text-center">
                 <p class="xui-font-sz-90">Already have an account? <a href="login">Sign in</a></p>
