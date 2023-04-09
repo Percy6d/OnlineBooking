@@ -193,6 +193,21 @@ header #circle {
 .ob-service-overview:hover > div {
     transform: scale(1.1);
 }
+.xui-form input.error {
+    border-color: var(--red) !important;
+}
+button:disabled,
+button:disabled:hover,
+button[disabled],
+button[disabled]:hover,
+.xui-btn:disabled,
+.xui-btn:disabled:hover,
+.xui-btn[disabled],
+.xui-btn[disabled]:hover,
+.xui-btn-disabled,
+.xui-btn-disabled:hover {
+    opacity: .2;
+}
 @media screen and (max-width: 768px) {
     .xui-navbar .links ul li a {
         color: var(--white);
