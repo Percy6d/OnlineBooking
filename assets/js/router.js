@@ -6,7 +6,7 @@ app.config(($routeProvider, $locationProvider) => {
     })
     .when("/login", {
         templateUrl: "views/login.html",
-        // controller: "login-controller",
+        controller: "login-controller",
         resolve: {
             "check": (security) => {
                 security.isLoggedIn();

@@ -64,5 +64,71 @@ class Users {
         }
         return $output;
     }
+    function authUser($obj){
+        $passwordSecured = new PasswordSecured();
+        if(isset($obj->emailAddress)){
+            $objEmailAddress = trim(strtolower($obj->emailAddress));
+        } else {
+            if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(406);}
+            exit("No emailAddress property was found in your object");
+        }
+        if(!isset($obj->password)){
+            if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(406);}
+            exit("No password property was found in your object");
+        }
+        try
+        {
+            $query = $this->conn->prepare("SELECT uid, emailAddress, password, isVerified FROM users WHERE emailAddress = :emailAddress");
+            $query->bindParam(":emailAddress", $objEmailAddress);
+            if($query->execute()){
+                if($query->rowCount() > 0){
+                    $result = $query->fetch(PDO::FETCH_ASSOC);
+                    $jwt = new MyJWT();
+                    $hashedPassword = $result["password"];
+                    $verifyPassword = $passwordSecured->verify($obj->password, $hashedPassword);
+                    if($verifyPassword){
+                        if((int)$result["isVerified"] == 1){
+                            $result["isVerified"] = true;
+                        } else {
+                            $result["isVerified"] = false;
+                        }
+                        $jwtEncode = $jwt->encode("users", $result);
+                        $jwtEncode["message"] = "Logged in successfully!";
+                        $output = $jwtEncode;
+                        if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(202);}
+                    }
+                    else {
+                        $output = "Incorrect password";
+                        if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){
+                            if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(401);}
+                        }
+                        
+                    }
+                }
+                else {
+                    $output = "No mobile number found!";
+                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){
+                        if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(401);}
+                    }
+                }
+            }
+            else {
+                $output = "Something went wrong!";
+                if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){
+                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(400);}
+                }
+                
+            }
+        }
+        catch (PDOException $e)
+        {
+            $output = "Query Failed: {$e->getMessage()}";
+            if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){
+                if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(400);}
+            }
+            
+        }
+        return $output;
+    }
 }
 ?>
