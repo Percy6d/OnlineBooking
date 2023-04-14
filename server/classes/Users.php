@@ -3,7 +3,7 @@
 require_once("../../config/uidGenerator.php");
 require_once("../../config/passwordSecured.php");
 require_once("../../config/datetimeGenerator.php");
-// require_once("../../config/MyJWT.php");
+require_once("../../config/MyJWT.php");
 // require_once("../../config/customMail.php");
 require_once("../../config/ConnectDB.php");
 class Users {
@@ -42,7 +42,14 @@ class Users {
             $query->bindParam(":timeCreated", $dateTimeUTC);
             $query->bindParam(":timeUpdated", $dateTimeUTC);
             if($query->execute()){
-                $output = "New user added";
+                $lastInsertedID = $this->conn->lastInsertId();
+                $tokenizedData = new stdClass();
+                $tokenizedData->id = $lastInsertedID;
+                $tokenizedData->emailAddress = $objEmailAddress;
+                $jwt = new MyJWT();
+                $jwtEncode = $jwt->encode("users", $tokenizedData);
+                $jwtEncode["message"] = "New user added";
+                $output = $jwtEncode;
                 if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(201);}
             }
             else {

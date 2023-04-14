@@ -1,7 +1,7 @@
 <?php
 
 // Require vendor folder
-require "../vendor/autoload.php";
+require "../../vendor/autoload.php";
 date_default_timezone_set('UTC');
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
