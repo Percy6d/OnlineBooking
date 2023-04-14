@@ -92,6 +92,7 @@ class Users {
                         } else {
                             $result["isVerified"] = false;
                         }
+                        unset($result["password"]);
                         $jwtEncode = $jwt->encode("users", $result);
                         $jwtEncode["message"] = "Logged in successfully!";
                         $output = $jwtEncode;

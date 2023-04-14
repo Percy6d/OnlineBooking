@@ -9,7 +9,7 @@ use \Firebase\JWT\Key;
 class MyJWT {
     function encode($audience, $data){
         // Creating the payload
-        $iss = "joeldimcrm.com";
+        $iss = "onlineBooking";
         $iat = time();
         $nbf = $iat + 5;
         $exp = $iat + (60*60*1);
@@ -62,8 +62,7 @@ class MyJWT {
         }
         return $output;
     }
-    function refresh($obj)
-    {
+    function refresh($obj){
         $headers = getallheaders();
         $jwt = $headers['Authorization'];
         if(!empty($jwt)){

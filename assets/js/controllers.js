@@ -15,7 +15,7 @@ app.controller("register-controller", function($rootScope, $scope, $http, $cooki
             "method": "POST",
             "url": "server/v1/users/create-new",
             "data": $scope.user,
-            "header": {
+            "headers": {
                 "Content-Type": "application/json"
             }
         }).then((success) => {
@@ -55,7 +55,7 @@ app.controller("login-controller", function($rootScope, $scope, $http, $cookies,
             "method": "POST",
             "url": "server/v1/users/authorize",
             "data": $scope.user,
-            "header": {
+            "headers": {
                 "Content-Type": "application/json"
             }
         }).then((success) => {
