@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="xui-form-box">
-                <button class="xui-btn-block xui-btn-black" ng-disabled="!createUserForm.$valid || !agreement || isLoading">Create Account</button>
+                <button class="xui-btn-block xui-btn-black" ng-disabled="!createUserForm.$valid || !agreement || isLoading" ng-init="defaultFormText = 'Create Account'">{{defaultFormText}}</button>
             </div>
             <div class="xui-text-center">
                 <p class="xui-font-sz-90">Already have an account? <a href="login">Sign in</a></p>
@@ -42,3 +42,4 @@
         </form>
     </div>
 </section>
+<alert-danger msg="{{errMsg}}"></alert-danger>
