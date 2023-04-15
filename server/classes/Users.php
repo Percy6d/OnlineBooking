@@ -107,7 +107,52 @@ class Users {
                     }
                 }
                 else {
-                    $output = "No mobile number found!";
+                    $output = "Emai address is not found!";
+                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){
+                        if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(401);}
+                    }
+                }
+            }
+            else {
+                $output = "Something went wrong!";
+                if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){
+                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(400);}
+                }
+                
+            }
+        }
+        catch (PDOException $e)
+        {
+            $output = "Query Failed: {$e->getMessage()}";
+            if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){
+                if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(400);}
+            }
+            
+        }
+        return $output;
+    }
+    function getDetails($identifier){
+        try
+        {
+            $query = $this->conn->prepare("SELECT * FROM users WHERE uid = :uid OR id = :id OR emailAddress = :emailAddress");
+            $query->bindParam(":uid", $identifier);
+            $query->bindParam(":id", $identifier);
+            $query->bindParam(":emailAddress", $identifier);
+            if($query->execute()){
+                if($query->rowCount() > 0){
+                    $result = $query->fetch(PDO::FETCH_ASSOC);
+                    (int)$result["id"];
+                    if((int)$result["isVerified"] == 1){
+                        $result["isVerified"] = true;
+                    } else {
+                        $result["isVerified"] = false;
+                    }
+                    unset($result["password"]);
+                    $output = $result;
+                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(202);}
+                }
+                else {
+                    $output = "No employee found";
                     if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){
                         if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(401);}
                     }

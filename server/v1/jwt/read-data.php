@@ -6,6 +6,10 @@ require_once("../../config/MyJWT.php");
 
 $jwt = new MyJWT();
 $jwtDecode = $jwt->decode();
-echo json_encode($jwtDecode);
+if(is_array($jwtDecode) || is_object($jwtDecode)){
+    echo json_encode($jwtDecode);
+} else {
+    echo $jwtDecode;
+}
 
 ?>
