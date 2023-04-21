@@ -1,1 +1,92 @@
-<h1>Dashboard Page</h1>
+<section class="xui-dashboard">
+    <div class="navigator xui-text-white xui-px-1 disable-scrollbars xui-bg-blue">
+        <div class="brand xui-pt-2">
+            <div class="maxified xui-d-flex xui-flex-ai-center">
+                <a class='xui-text-inherit xui-text-dc-none' href="/">
+                    <div class='xui-pl-1'>
+                        <span class='xui-font-sz-110 xui-font-w-bold'>OnlineBooking</span>
+                    </div>
+                </a>
+            </div>        
+        </div>
+        <div class="links xui-pt-2">
+            <a href='/' class="xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 active">
+                <div class="icon">
+                    <Category width="20" height="20" />
+                </div>
+                <div class="name xui-ml-half">
+                    <span>Dashboard</span>
+                </div>
+            </a>
+            <a href='dashboard/bookings' class="xui-text-inherit link-box xui-font-sz-90 xui-opacity-6">
+                <div class="icon">
+                    <Swap width="20" height="20" />
+                </div>
+                <div class="name xui-ml-half">
+                    <span>Bookings</span>
+                </div>
+            </a>
+            <a href='/wallet' class="xui-text-inherit link-box xui-font-sz-90 xui-opacity-6">
+                <div class="icon">
+                    <Wallet width="20" height="20" />
+                </div>
+                <div class="name xui-ml-half">
+                    <span>Wallet</span>
+                </div>
+            </a>
+            <a href='/settings' class="xui-text-inherit link-box xui-font-sz-90 xui-opacity-6">
+                <div class="icon">
+                    <Setting />
+                </div>
+                <div class="name xui-ml-half">
+                    <span>Settings</span>
+                </div>
+            </a> 
+            <div class="bottom-fixed xui-mt--5">
+                <a href='/' class="xui-text-inherit link-box xui-font-sz-90 xui-opacity-6">
+                    <div class="icon">
+                        <Logout width="20" height="20" />
+                    </div>
+                    <div class="name xui-ml-half">
+                        <span>Logout</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Screen -->
+    <div class="screen" xui-aside="true" xui-navbar="true">
+        <section class="content xui-px-1-half xui-lg-px-3">
+            <nav menu="2" class="xui-navbar xui-d-flex xui-flex-ai-center xui-flex-jc-space-between xui-bg-white xui-px-1-half xui-lg-px-3">
+                <div>
+                    <h1 class='xui-font-sz-150 xui-lg-font-sz-200 xui-font-w-bold'>Overview</h1>
+                </div>
+                <div class="xui-d-inline-flex xui-flex-ai-center">
+                    <div class="xui-d-inline-flex xui-w-45 xui-h-45 xui-d-inline-flex xui-flex-ai-center xui-flex-jc-center xui-mr-1 xui-bdr-rad-circle xui-bg-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="xui-opacity-6" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M16.0503 12.0498L21 16.9996L16.0503 21.9493L14.636 20.5351L17.172 17.9988L4 17.9996V15.9996L17.172 15.9988L14.636 13.464L16.0503 12.0498ZM7.94975 2.0498L9.36396 3.46402L6.828 5.9988L20 5.99955V7.99955L6.828 7.9988L9.36396 10.5351L7.94975 11.9493L3 6.99955L7.94975 2.0498Z"></path></svg>
+                    </div>
+                    <div class="xui-d-inline-flex xui-w-45 xui-h-45 xui-d-inline-flex xui-flex-ai-center xui-flex-jc-center xui-mr-1 xui-bdr-rad-circle xui-bg-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="xui-opacity-6" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M5 18H19V11.0314C19 7.14806 15.866 4 12 4C8.13401 4 5 7.14806 5 11.0314V18ZM12 2C16.9706 2 21 6.04348 21 11.0314V20H3V11.0314C3 6.04348 7.02944 2 12 2ZM9.5 21H14.5C14.5 22.3807 13.3807 23.5 12 23.5C10.6193 23.5 9.5 22.3807 9.5 21Z"></path></svg>
+                    </div>
+                    <div class="xui-w-50 xui-h-50 xui-bdr-rad-circle xui-bg-blue"></div>
+                    <div class="menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </nav>
+            <button class="xui-btn xui-btn-blue xui-open-sidebar">Click me</button>
+        </section>
+        <div class="aside psc-bg-light-blue xui-py-2 xui-px-1-half xui-bg-white">
+            <div class="xui-bg-light-3 xui-p-1-half xui-bdr-rad-1">
+                <div class="xui-text-center">
+                    <div class="xui-w-100 xui-h-100 xui-bdr-rad-circle xui-bdr-1 xui-bdr-s-solid xui-bdr-blue xui-mx-auto"></div>
+                    <h4 class="xui-font-sz-100 xui-mb-half xui-mt-1">Richard Gigi</h4>
+                    <span class="xui-opacity-5">@richaadgigi</span>
+                    <a href="#" class="xui-btn-block xui-btn-blue xui-mt-1-half xui-bdr-rad-5">Visit profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
