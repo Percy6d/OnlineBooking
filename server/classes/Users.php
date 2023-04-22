@@ -50,7 +50,7 @@ class Users {
                 $jwtEncode = $jwt->encode("users", $tokenizedData);
                 $jwtEncode["message"] = "New user added";
                 $output = $jwtEncode;
-                if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(201);}
+                if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(200);}
             }
             else {
                 $output = "Something went wrong!";
@@ -96,7 +96,7 @@ class Users {
                         $jwtEncode = $jwt->encode("users", $result);
                         $jwtEncode["message"] = "Logged in successfully!";
                         $output = $jwtEncode;
-                        if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(202);}
+                        if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(200);}
                     }
                     else {
                         $output = "Incorrect password";
