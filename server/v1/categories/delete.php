@@ -2,17 +2,17 @@
 
 ini_set("display_errors", 1);
 
-require_once("../../classes/Types.php");
+require_once("../../classes/Category.php");
 
 $getData = json_decode(file_get_contents("php://input", true));
 if(!empty($getData)){
-    $types = new Types();
+    $category = new Category();
     if(isset($getData->uid)){
-        $deleteType = $types->deleteType($getData->uid);
-        if(is_array($deleteType) || is_object($deleteType)){
-            echo json_encode($deleteType);
+        $deleteCategory = $category->deleteCategory($getData->uid);
+        if(is_array($deleteCategory) || is_object($deleteCategory)){
+            echo json_encode($deleteCategory);
         } else {
-            echo $deleteType;
+            echo $deleteCategory;
         }
     } else {
         if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(406);}
