@@ -17,7 +17,7 @@ class Category {
         $uid = $generatedUID->getUID(20, null);
         $dateTimeUTC = $dateTimeGenerate->toUTC();
         // Trimming name before inserting to DB
-        $name = trim(strtolower($name));
+        $name = trim(ucfirst(strtolower($name)));
         try {
             $query = $this->conn->prepare("INSERT INTO categories (uid, name, timeCreated, timeUpdated) VALUES (:uid, :name, :timeCreated, :timeUpdated)");
             $query->bindParam(":uid", $uid);
@@ -25,7 +25,7 @@ class Category {
             $query->bindParam(":timeCreated", $dateTimeUTC);
             $query->bindParam(":timeUpdated", $dateTimeUTC);
             if($query->execute()){
-                $output = "New type \"" . $name . "\" created";
+                $output = "New category \"" . $name . "\" created";
                 if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
             }
             else {
@@ -40,7 +40,7 @@ class Category {
         }
         return $output;
     }
-    function editType($obj){
+    function editCategory($obj){
         $dateTimeGenerate = new DateTimeGenerator();
         $dateTimeUTC = $dateTimeGenerate->toUTC();
         if(!isset($obj->uid)){
@@ -52,10 +52,10 @@ class Category {
             exit("No name property was found in your object");
         } else {
             // Trimming name before inserting to DB
-            $name = trim(strtolower($obj->name));
+            $name = trim(ucfirst(strtolower($obj->name)));
         }
         try {
-            $query = $this->conn->prepare("UPDATE types SET name = :name, timeUpdated = :timeUpdated WHERE uid = :uid");
+            $query = $this->conn->prepare("UPDATE categories SET name = :name, timeUpdated = :timeUpdated WHERE uid = :uid");
             $query->bindParam(":uid", $obj->uid);
             $query->bindParam(":name", $name);
             $query->bindParam(":timeUpdated", $dateTimeUTC);
@@ -75,9 +75,9 @@ class Category {
         }
         return $output;
     }
-    function deleteType($identifier){
+    function deleteCategory($identifier){
         try {
-            $query = $this->conn->prepare("DELETE FROM types WHERE uid = :identifier");
+            $query = $this->conn->prepare("DELETE FROM categories WHERE uid = :identifier");
             $query->bindParam(":identifier", $identifier);
             if($query->execute()){
                 $output = "UID \"". $identifier ."\" has been deleted";
@@ -95,9 +95,9 @@ class Category {
         }
         return $output;
     }
-    function getAllTypes(){
+    function getAllCategories(){
         try {
-            $query = $this->conn->prepare("SELECT * FROM types LIMIT 20");
+            $query = $this->conn->prepare("SELECT * FROM categories LIMIT 20");
             if($query->execute()){
                 if($query->rowCount() > 0){
                     $output = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -119,9 +119,9 @@ class Category {
         }
         return $output;
     }
-    function getType($identifier){
+    function getCategory($identifier){
         try {
-            $query = $this->conn->prepare("SELECT * FROM types WHERE uid = :identifier");
+            $query = $this->conn->prepare("SELECT * FROM categories WHERE uid = :identifier");
             $query->bindParam(":identifier", $identifier);
             if($query->execute()){
                 if($query->rowCount() > 0){

@@ -17,7 +17,7 @@ class Types {
         $uid = $generatedUID->getUID(20, null);
         $dateTimeUTC = $dateTimeGenerate->toUTC();
         // Trimming name before inserting to DB
-        $name = trim(strtolower($name));
+        $name = trim(ucfirst(strtolower($name)));
         try {
             $query = $this->conn->prepare("INSERT INTO types (uid, name, timeCreated, timeUpdated) VALUES (:uid, :name, :timeCreated, :timeUpdated)");
             $query->bindParam(":uid", $uid);
@@ -52,7 +52,7 @@ class Types {
             exit("No name property was found in your object");
         } else {
             // Trimming name before inserting to DB
-            $name = trim(strtolower($obj->name));
+            $name = trim(ucfirst(strtolower($obj->name)));
         }
         try {
             $query = $this->conn->prepare("UPDATE types SET name = :name, timeUpdated = :timeUpdated WHERE uid = :uid");

@@ -2,16 +2,16 @@
 
 ini_set("display_errors", 1);
 
-require_once("../../classes/Types.php");
+require_once("../../classes/Category.php");
 
 $getData = json_decode(file_get_contents("php://input", true));
 if(!empty($getData)){
-    $types = new Types();
-    $editType = $types->editType($getData);
-    if(is_array($editType) || is_object($editType)){
-        echo json_encode($editType);
+    $category = new Category();
+    $editCategory = $category->editCategory($getData);
+    if(is_array($editCategory) || is_object($editCategory)){
+        echo json_encode($editCategory);
     } else {
-        echo $editType;
+        echo $editCategory;
     }
 } else {
     echo json_encode("Empty post data");
