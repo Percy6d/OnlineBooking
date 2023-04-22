@@ -4,20 +4,29 @@
         <h2 class="xui-font-sz-175 xui-font-w-normal">Welcome back user 😄</h2>
         <form name="authorizeUserForm" class="xui-form" layout="2" novalidate ng-submit="authUser()">
             <div class="xui-form-box">
-                <input ng-class="{'error': authorizeUserForm.email.$touched && !authorizeUserForm.email.$valid}" type="email" name="email" id="email" ng-model="user.emailAddress" placeholder="Your email address" minlength="5" maxlength="30" required>
-                <span ng-if="authorizeUserForm.email.$touched && authorizeUserForm.email.$error.required" class="xui-form-error-msg">Enter your email address</span>
-                <span ng-if="authorizeUserForm.email.$touched && authorizeUserForm.email.$error.minlength" class="xui-form-error-msg">This field needs more character</span>
-                <span ng-if="authorizeUserForm.email.$touched && authorizeUserForm.email.$error.maxlength" class="xui-form-error-msg">This field has exceeded it's limits</span>
-                <span ng-if="authorizeUserForm.email.$touched && authorizeUserForm.email.$error.email" class="xui-form-error-msg">This field needs to be a valid email address</span>
+                <input ng-class="{'error': authorizeUserForm.email.$touched && !authorizeUserForm.email.$valid}" type="email" name="email" id="email" 
+                ng-model="user.emailAddress" placeholder="Your email address" minlength="5" maxlength="30" required>
+                <span ng-if="authorizeUserForm.email.$touched && authorizeUserForm.email.$error.required" class="xui-form-error-msg">
+                    Enter your email address</span>
+                <span ng-if="authorizeUserForm.email.$touched && authorizeUserForm.email.$error.minlength" class="xui-form-error-msg">
+                    This field needs more character</span>
+                <span ng-if="authorizeUserForm.email.$touched && authorizeUserForm.email.$error.maxlength" class="xui-form-error-msg">
+                    This field has exceeded it's limits</span>
+                <span ng-if="authorizeUserForm.email.$touched && authorizeUserForm.email.$error.email" class="xui-form-error-msg">
+                    This field needs to be a valid email address</span>
             </div>
             <div class="xui-form-box">
-                <input ng-class="{'error': authorizeUserForm.password.$touched && !authorizeUserForm.password.$valid}" type="password" name="password" id="password" ng-model="user.password" placeholder="Enter a password" minlength="4" maxlength="20" required>
+                <input ng-class="{'error': authorizeUserForm.password.$touched && !authorizeUserForm.password.$valid}" type="password" name="password" id="password" 
+                ng-model="user.password" placeholder="Enter a password" minlength="4" maxlength="20" required>
                 <span ng-if="authorizeUserForm.password.$touched && authorizeUserForm.password.$error.required" class="xui-form-error-msg">Enter a password</span>
-                <span ng-if="authorizeUserForm.password.$touched && authorizeUserForm.password.$error.minlength" class="xui-form-error-msg">This field needs more character</span>
-                <span ng-if="authorizeUserForm.password.$touched && authorizeUserForm.password.$error.maxlength" class="xui-form-error-msg">This field has exceeded it's limits</span>
+                <span ng-if="authorizeUserForm.password.$touched && authorizeUserForm.password.$error.minlength" class="xui-form-error-msg">
+                    This field needs more character</span>
+                <span ng-if="authorizeUserForm.password.$touched && authorizeUserForm.password.$error.maxlength" class="xui-form-error-msg">
+                    This field has exceeded it's limits</span>
             </div>
             <div class="xui-form-box">
-                <button class="xui-btn-block xui-btn-black" ng-disabled="!authorizeUserForm.$valid || isLoading" ng-init="defaultFormText = 'Log into your account'">{{defaultFormText}}</button>
+                <button class="xui-btn-block xui-btn-black" ng-disabled="!authorizeUserForm.$valid || isLoading" ng-init="defaultFormText = 'Log into your account'">
+                    {{defaultFormText}}</button>
             </div>
             <div class="xui-text-center">
                 <p class="xui-font-sz-90">Don't have an account? <a href="register">Sign up</a></p>
