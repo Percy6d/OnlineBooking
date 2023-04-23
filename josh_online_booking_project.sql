@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2023 at 01:39 PM
+-- Generation Time: Apr 23, 2023 at 12:25 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -31,10 +31,18 @@ CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `uid` varchar(20) NOT NULL,
   `name` varchar(20) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `imageURL` varchar(255) DEFAULT NULL,
   `timeCreated` datetime NOT NULL,
   `timeUpdated` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `uid`, `name`, `imageURL`, `timeCreated`, `timeUpdated`) VALUES
+(2, '5yc8dqaGiRZDwjztU1Tl', 'Artisan', 'https://images.pexels.com/photos/1675993/pexels-photo-1675993.jpeg?auto=compress&cs=tinysrgb&w=600', '2023-04-22 18:05:48', '2023-04-22 18:05:48'),
+(4, 'bk4pu8sgNfmJG1aCIer0', 'Housing', 'https://images.pexels.com/photos/144632/pexels-photo-144632.jpeg?auto=compress&cs=tinysrgb&w=600', '2023-04-22 18:06:36', '2023-04-22 18:06:36');
 
 -- --------------------------------------------------------
 
@@ -54,6 +62,13 @@ CREATE TABLE `commodities` (
   `timeUpdated` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `commodities`
+--
+
+INSERT INTO `commodities` (`id`, `uid`, `name`, `userID`, `categoryID`, `typeID`, `status`, `timeCreated`, `timeUpdated`) VALUES
+(2, 'z5SimX0j6MZufYIwD9Cn', 'Random laptops', 1, 2, 1, 0, '2023-04-23 00:25:20', '2023-04-23 00:25:20');
+
 -- --------------------------------------------------------
 
 --
@@ -67,6 +82,15 @@ CREATE TABLE `commodities_images` (
   `url` varchar(255) NOT NULL,
   `timeAdded` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `commodities_images`
+--
+
+INSERT INTO `commodities_images` (`id`, `uid`, `commodityID`, `url`, `timeAdded`) VALUES
+(1, 'JQeK4y59S0sCuztFiLxq', 2, 'https://images.pexels.com/photos/11129922/pexels-photo-11129922.jpeg?auto=compress&cs=tinysrgb&w=600', '2023-04-23 00:25:20'),
+(2, 'y1eHZRLYnjGf0Q87XOUK', 2, 'https://images.pexels.com/photos/16254610/pexels-photo-16254610.jpeg?auto=compress&cs=tinysrgb&w=600', '2023-04-23 00:25:20'),
+(3, 'kTZ8ugQnRjYvecmBxzWP', 2, 'https://images.pexels.com/photos/13791390/pexels-photo-13791390.jpeg?auto=compress&cs=tinysrgb&w=600', '2023-04-23 00:25:20');
 
 -- --------------------------------------------------------
 
@@ -143,7 +167,8 @@ ALTER TABLE `commodities`
 --
 ALTER TABLE `commodities_images`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `uid` (`uid`);
+  ADD UNIQUE KEY `uid` (`uid`),
+  ADD KEY `commodityID` (`commodityID`);
 
 --
 -- Indexes for table `types`
@@ -168,25 +193,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `commodities`
 --
 ALTER TABLE `commodities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `commodities_images`
 --
 ALTER TABLE `commodities_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `types`
 --
 ALTER TABLE `types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -205,6 +230,12 @@ ALTER TABLE `commodities`
   ADD CONSTRAINT `commodities_ibfk_1` FOREIGN KEY (`categoryID`) REFERENCES `categories` (`id`),
   ADD CONSTRAINT `commodities_ibfk_2` FOREIGN KEY (`typeID`) REFERENCES `types` (`id`),
   ADD CONSTRAINT `commodities_ibfk_3` FOREIGN KEY (`userID`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `commodities_images`
+--
+ALTER TABLE `commodities_images`
+  ADD CONSTRAINT `commodities_images_ibfk_1` FOREIGN KEY (`commodityID`) REFERENCES `commodities` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
