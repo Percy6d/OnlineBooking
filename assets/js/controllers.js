@@ -81,6 +81,20 @@ app.controller("login-controller", function($rootScope, $scope, $http, $cookies,
         });
     }
 });
+app.controller("services-controller", function($scope, $http){
+    $http({
+        "method": "GET",
+        "url": "server/v1/categories/fetch-all",
+        "header": {
+            "Content-Type": "application/json"
+        }
+    })
+    .then((success) => {
+        $scope.categories = success.data;
+    }, (error) => {
+        console.log(error);
+    });
+});
 app.controller("navbarCtrl", function($rootScope, $scope, $location){
     $scope.path = $location.path();
 });

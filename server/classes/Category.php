@@ -18,10 +18,12 @@ class Category {
         $dateTimeUTC = $dateTimeGenerate->toUTC();
         // Trimming name before inserting to DB
         $name = trim(ucfirst(strtolower($name)));
+        $imageURL = null;
         try {
-            $query = $this->conn->prepare("INSERT INTO categories (uid, name, timeCreated, timeUpdated) VALUES (:uid, :name, :timeCreated, :timeUpdated)");
+            $query = $this->conn->prepare("INSERT INTO categories (uid, name, imageURL, timeCreated, timeUpdated) VALUES (:uid, :name, :imageURL, :timeCreated, :timeUpdated)");
             $query->bindParam(":uid", $uid);
             $query->bindParam(":name", $name);
+            $query->bindParam(":imageURL", $imageURL);
             $query->bindParam(":timeCreated", $dateTimeUTC);
             $query->bindParam(":timeUpdated", $dateTimeUTC);
             if($query->execute()){
