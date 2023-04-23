@@ -107,7 +107,7 @@ class Users {
                     }
                 }
                 else {
-                    $output = "Emai address is not found!";
+                    $output = "Email address is not found!";
                     if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){
                         if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(401);}
                     }
