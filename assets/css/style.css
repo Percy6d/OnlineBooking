@@ -208,6 +208,16 @@ button[disabled]:hover,
 .xui-btn-disabled:hover {
     opacity: .2;
 }
+.xui-dashboard .navigator {
+    background-color: var(--black) !important;
+}
+.ob-link-box {
+    opacity: 1 !important;
+    color: #FFFFFF !important;
+    background-color: #000000 !important;
+    width: 300px;
+    height: 100px;
+}
 @media screen and (max-width: 768px) {
     .xui-navbar .links ul li a {
         color: var(--white);

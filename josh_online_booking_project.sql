@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2023 at 12:25 PM
+-- Generation Time: Apr 24, 2023 at 10:20 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,6 +20,24 @@ SET time_zone = "+00:00";
 --
 -- Database: `josh_online_booking_project`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookings`
+--
+
+CREATE TABLE `bookings` (
+  `id` int(11) NOT NULL,
+  `uid` varchar(20) NOT NULL,
+  `commodityID` int(11) NOT NULL,
+  `userID` int(11) NOT NULL,
+  `dateFrom` date NOT NULL,
+  `dateTo` date NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `timeCreated` datetime NOT NULL,
+  `timeUpdated` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -95,6 +113,20 @@ INSERT INTO `commodities_images` (`id`, `uid`, `commodityID`, `url`, `timeAdded`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `payment_histories`
+--
+
+CREATE TABLE `payment_histories` (
+  `id` int(11) NOT NULL,
+  `reference` varchar(50) NOT NULL,
+  `bookingID` int(11) NOT NULL,
+  `amount` float NOT NULL,
+  `timePaid` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `types`
 --
 
@@ -145,6 +177,15 @@ INSERT INTO `users` (`id`, `uid`, `firstname`, `lastname`, `emailAddress`, `mobi
 --
 
 --
+-- Indexes for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uid` (`uid`),
+  ADD KEY `commodityID` (`commodityID`),
+  ADD KEY `userID` (`userID`);
+
+--
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
@@ -171,6 +212,14 @@ ALTER TABLE `commodities_images`
   ADD KEY `commodityID` (`commodityID`);
 
 --
+-- Indexes for table `payment_histories`
+--
+ALTER TABLE `payment_histories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `reference` (`reference`),
+  ADD KEY `bookingID` (`bookingID`);
+
+--
 -- Indexes for table `types`
 --
 ALTER TABLE `types`
@@ -188,6 +237,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `bookings`
+--
+ALTER TABLE `bookings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -208,6 +263,12 @@ ALTER TABLE `commodities_images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `payment_histories`
+--
+ALTER TABLE `payment_histories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `types`
 --
 ALTER TABLE `types`
@@ -224,6 +285,13 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`commodityID`) REFERENCES `commodities` (`id`),
+  ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`id`);
+
+--
 -- Constraints for table `commodities`
 --
 ALTER TABLE `commodities`
@@ -236,6 +304,12 @@ ALTER TABLE `commodities`
 --
 ALTER TABLE `commodities_images`
   ADD CONSTRAINT `commodities_images_ibfk_1` FOREIGN KEY (`commodityID`) REFERENCES `commodities` (`id`);
+
+--
+-- Constraints for table `payment_histories`
+--
+ALTER TABLE `payment_histories`
+  ADD CONSTRAINT `payment_histories_ibfk_1` FOREIGN KEY (`bookingID`) REFERENCES `bookings` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

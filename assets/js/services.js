@@ -1,7 +1,7 @@
 app.service("security", function($cookies, $location, $http){
     this.isLoggedIn = function(){
         let tokenCookie = $cookies.get("bk-tokens", {path: '/'});
-        if(tokenCookie === undefined || Object.keys(tokenCookie).length <= 0){
+        if(tokenCookie === undefined || tokenCookie.length <= 2){
             // Redirect to login page
             $location.path("/login");
         } else {
@@ -24,6 +24,7 @@ app.service("security", function($cookies, $location, $http){
                     "Authorization": tokenCookie.access
                 }
             }).then((success) => {
+                console.log(success.data);
                 let exp = new Date(); exp. setDate(exp. getDate() + 30);
                 let tokens = {};
                 tokens.access = success.data.access_token;
@@ -35,7 +36,7 @@ app.service("security", function($cookies, $location, $http){
                     expires: exp
                 });
             }, (error) => {
-                // console.log(error.data);
+                console.log(error.data);
             });
         }
     }
@@ -43,6 +44,7 @@ app.service("security", function($cookies, $location, $http){
 app.service("fetches", function($rootScope, $http, $cookies){
     this.userDetails = function(){
         let tokenCookie = $cookies.get("bk-tokens", {path: '/'});
+        console.log(tokenCookie);
         if(tokenCookie === undefined){
             $rootScope.loggedInUser = {};
         } else {
@@ -56,6 +58,7 @@ app.service("fetches", function($rootScope, $http, $cookies){
                 }
             }).then((success) => {
                 let jwtData = success.data.data;
+                console.log(jwtData);
                 $http({
                     "method": "POST",
                     "url": "server/v1/users/details",

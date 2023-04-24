@@ -74,7 +74,7 @@ class MyJWT {
                     try {
                         $decoded = (array) JWT::decode($jwt, new Key($secret_key, 'HS512'));
                         $output = "Still in use";
-                        if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(208);}
+                        if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST'){http_response_code(400);}
                     } catch(Exception $ex) {
                         if($ex->getMessage() == "Expired token"){
                             list($header, $payload, $signature) = explode(".", $jwt);
