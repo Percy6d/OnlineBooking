@@ -25,16 +25,18 @@ app.service("security", function($cookies, $location, $http){
                 }
             }).then((success) => {
                 console.log(success.data);
-                let exp = new Date(); exp. setDate(exp. getDate() + 30);
-                let tokens = {};
-                tokens.access = success.data.access_token;
-                tokens.refresh = success.data.refresh_token;
-                $cookies.put('bk-tokens', JSON.stringify(tokens), {
-                    path: '/',
-                    secure: true,
-                    samesite: 'strict',
-                    expires: exp
-                });
+                if(success.data !== "Still in use"){
+                    let exp = new Date(); exp. setDate(exp. getDate() + 30);
+                    let tokens = {};
+                    tokens.access = success.data.access_token;
+                    tokens.refresh = success.data.refresh_token;
+                    $cookies.put('bk-tokens', JSON.stringify(tokens), {
+                        path: '/',
+                        secure: true,
+                        samesite: 'strict',
+                        expires: exp
+                    });
+                }
             }, (error) => {
                 console.log(error.data);
             });

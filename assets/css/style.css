@@ -208,9 +208,6 @@ button[disabled]:hover,
 .xui-btn-disabled:hover {
     opacity: .2;
 }
-.xui-dashboard .navigator {
-    background-color: var(--black) !important;
-}
 .ob-link-box {
     opacity: 1 !important;
     color: #FFFFFF !important;
