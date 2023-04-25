@@ -46,6 +46,7 @@ app.config(($routeProvider, $locationProvider) => {
     })
     .when("/dashboard/overview", {
         templateUrl: "views/dashboard/overview.html",
+        controller: "dashboard-overview-controller",
         resolve: {
             "check": (security, fetches) => {
                 security.isLoggedIn();

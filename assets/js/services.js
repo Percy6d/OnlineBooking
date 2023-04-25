@@ -24,7 +24,6 @@ app.service("security", function($cookies, $location, $http){
                     "Authorization": tokenCookie.access
                 }
             }).then((success) => {
-                console.log(success.data);
                 if(success.data !== "Still in use"){
                     let exp = new Date(); exp. setDate(exp. getDate() + 30);
                     let tokens = {};
@@ -38,7 +37,7 @@ app.service("security", function($cookies, $location, $http){
                     });
                 }
             }, (error) => {
-                console.log(error.data);
+                // console.log(error.data);
             });
         }
     }
@@ -46,7 +45,6 @@ app.service("security", function($cookies, $location, $http){
 app.service("fetches", function($rootScope, $http, $cookies){
     this.userDetails = function(){
         let tokenCookie = $cookies.get("bk-tokens", {path: '/'});
-        console.log(tokenCookie);
         if(tokenCookie === undefined){
             $rootScope.loggedInUser = {};
         } else {
@@ -60,7 +58,6 @@ app.service("fetches", function($rootScope, $http, $cookies){
                 }
             }).then((success) => {
                 let jwtData = success.data.data;
-                console.log(jwtData);
                 $http({
                     "method": "POST",
                     "url": "server/v1/users/details",
@@ -71,12 +68,13 @@ app.service("fetches", function($rootScope, $http, $cookies){
                         "Content-Type": "application/json"
                     }
                 }).then((success) => {
+                    console.log(success.data);
                     $rootScope.loggedInUser = success.data;
                 }, (error) => {
-                    // console.log(error.data);
+                    console.log(error.data);
                 });
             }, (error) => {
-                // console.log(error.data);
+                console.log(error.data);
             });
         }
     }

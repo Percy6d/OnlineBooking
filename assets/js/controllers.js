@@ -95,6 +95,12 @@ app.controller("services-controller", function($scope, $http){
         console.log(error);
     });
 });
+app.controller("dashboard-overview-controller", function($rootScope, $scope){
+    $scope.user = {};
+    $scope.submitBasicInfo = () => {
+        $scope.isDisabled = true;
+    }
+});
 app.controller("navbarCtrl", function($rootScope, $scope, $location){
     $scope.path = $location.path();
 });

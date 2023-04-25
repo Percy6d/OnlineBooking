@@ -94,25 +94,31 @@
         </div>
     </div>
 </section>
-<section class="xui-modal" xui-modal="nameConfig" display="true">
+<section class="xui-modal" xui-modal="nameConfig" disable-click-on-outside ng-attr-display="{{loggedInUser.firstname == null || loggedInUser.lastname == null ? 'true' : ''}}">
     <div class="xui-modal-content xui-max-w-800 xui-w-fluid-100">
-        <form class="xui-form">
+        <form class="xui-form" name="updateBasicInfo" ng-submit="submitBasicInfo()" novalidate>
             <h1 class="xui-font-sz-180">Let's get to know you better</h1>
             <p class="xui-opacity-6 xui-mt-1 xui-md-w-fluid-70">Fill in the form so we can get your name and serve you better</p>
             <div class="xui-d-grid xui-grid-col-1 xui-lg-grid-col-2 xui-grid-gap-2 xui-mt-1">
                 <div class="xui-form-box">
                     <label>Firstname</label>
-                    <input type="text" />
+                    <input ng-class="{'error': updateBasicInfo.firstname.$touched && !updateBasicInfo.firstname.$valid}" name="firstname" type="text" ng-model="user.firstname" minlength="3" maxlength="15" required />
+                    <span class="xui-form-error-msg" ng-if="updateBasicInfo.firstname.$touched && updateBasicInfo.firstname.$error.required">This field is required</span>
+                    <span class="xui-form-error-msg" ng-if="updateBasicInfo.firstname.$touched && updateBasicInfo.firstname.$error.minlength">This field requires a minimum of 3 characters</span>
+                    <span class="xui-form-error-msg" ng-if="updateBasicInfo.firstname.$touched && updateBasicInfo.firstname.$error.maxlength">This field requires a maximum of 15 characters</span>
                 </div>
                 <div class="xui-form-box">
                     <label>Lastname</label>
-                    <input type="text" />
+                    <input ng-class="{'error': updateBasicInfo.lastname.$touched && !updateBasicInfo.lastname.$valid}" name="lastname" type="text" ng-model="user.lastname" minlength="3" maxlength="15" required />
+                    <span class="xui-form-error-msg" ng-if="updateBasicInfo.lastname.$touched && updateBasicInfo.lastname.$error.required">This field is required</span>
+                    <span class="xui-form-error-msg" ng-if="updateBasicInfo.lastname.$touched && updateBasicInfo.lastname.$error.minlength">This field requires a minimum of 3 characters</span>
+                    <span class="xui-form-error-msg" ng-if="updateBasicInfo.lastname.$touched && updateBasicInfo.lastname.$error.maxlength">This field requires a maximum of 15 characters</span>
                 </div>
             </div>
             <div class="xui-form-box xui-mt-none">
-                <button class="xui-btn xui-btn-blue xui-font-sz-90">
+                <button type="submit" class="xui-btn xui-btn-blue xui-font-sz-90 xui-pos-relative" ng-if="updateBasicInfo.$valid" ng-disabled="isDisabled">
                     <span>Update my info</span>
-                    <svg class="ob-spinner" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="currentColor" /><path d="M2 12C2 6.47715 6.47715 2 12 2V5C8.13401 5 5 8.13401 5 12H2Z" fill="currentColor" /></svg>
+                    <i class="gg-spinner"></i>
                 </button>
             </div>
         </form>
