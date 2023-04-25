@@ -104,3 +104,4 @@ app.controller("dashboard-overview-controller", function($rootScope, $scope){
 app.controller("navbarCtrl", function($rootScope, $scope, $location){
     $scope.path = $location.path();
 });
+
