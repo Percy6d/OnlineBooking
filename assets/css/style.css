@@ -98,6 +98,15 @@
     from { transform: rotate(360deg); }
     to { transform: rotate(0); }
 }
+.ob-spinner {
+    animation-name: spinner;
+    animation-duration: .2s;
+    animation-iteration-count: infinite;
+}
+@keyframes spinner {
+    0% { transform: rotate(0deg) }
+    to { transform: rotate(359deg) }
+}
 header #circle {
     position: absolute;
     top: 0;
