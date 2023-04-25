@@ -54,6 +54,7 @@ app.config(($routeProvider, $locationProvider) => {
             }
         }
     })
+    
     .otherwise({
         templateUrl: "page-not-found.html"
     });

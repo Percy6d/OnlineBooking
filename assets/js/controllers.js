@@ -98,3 +98,4 @@ app.controller("services-controller", function($scope, $http){
 app.controller("navbarCtrl", function($rootScope, $scope, $location){
     $scope.path = $location.path();
 });
+
