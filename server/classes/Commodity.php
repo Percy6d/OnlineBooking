@@ -3,6 +3,9 @@
 require_once("../../config/uidGenerator.php");
 require_once("../../config/datetimeGenerator.php");
 require_once("../../config/ConnectDB.php");
+require_once("Category.php");
+require_once("Types.php");
+require_once("Users.php");
 class Commodity {
     public $conn;
     public $connectDB;
@@ -148,6 +151,86 @@ class Commodity {
             if($query->execute()){
                 $output = "UID \"". $uid ."\" has been been deleted";
                 if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
+            }
+            else {
+                $output = "Something went wrong!";
+                if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(400);}
+                
+            }
+        } catch (PDOException $e) {
+            $output = "Query Failed: {$e->getMessage()}";
+            if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(400);}
+            
+        }
+        return $output;
+    }
+    function getAllCommodities(){
+        $category = new Category();
+        $types = new Types();
+        $users = new Users();
+        try {
+            $query = $this->conn->prepare("SELECT * FROM commodities LIMIT 20");
+            if($query->execute()){
+                if($query->rowCount() > 0){
+                    $commodities = $query->fetchAll(PDO::FETCH_ASSOC);
+                    $output = array();
+                    foreach($commodities as $commodity){
+                        if($commodity["status"] == 1){
+                            $commodity["status"] = true;
+                        } else {
+                            $commodity["status"] = false;
+                        }
+                        $commodityID = $commodity["id"];
+                        $categoryID = $commodity["categoryID"];
+                        $typeID = $commodity["typeID"];
+                        $userID = $commodity["userID"];
+                        $getCategory = $category->getCategory($categoryID);
+                        $commodity["category"] = $getCategory;
+                        $getType = $types->getType($typeID);
+                        $commodity["type"] = $getType;
+                        $getDetails = $users->getDetails($userID);
+                        $commodity["user"] = $getDetails;
+                        $commodityImages = $this->getAllCommodityImages($commodityID);
+                        $commodity["images"] = $commodityImages;
+                        unset($commodity["categoryID"]);
+                        unset($commodity["typeID"]);
+                        unset($commodity["userID"]);
+                        $output[] = $commodity;
+                    }
+                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
+                } else {
+                    $output = "No type found. Try creating one.";
+                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
+                }
+            }
+            else {
+                $output = "Something went wrong!";
+                if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(400);}
+                
+            }
+        } catch (PDOException $e) {
+            $output = "Query Failed: {$e->getMessage()}";
+            if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(400);}
+            
+        }
+        return $output;
+    }
+    function getAllCommodityImages($commodityID){
+        try {
+            $query = $this->conn->prepare("SELECT * FROM commodities_images");
+            if($query->execute()){
+                if($query->rowCount() > 0){
+                    $commodityImages = $query->fetchAll(PDO::FETCH_ASSOC);
+                    $output = array();
+                    foreach($commodityImages as $commodityImage){
+                        unset($commodityImage["commodityID"]);
+                        $output[] = $commodityImage;
+                    }
+                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
+                } else {
+                    $output = "No type found. Try creating one.";
+                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
+                }
             }
             else {
                 $output = "Something went wrong!";

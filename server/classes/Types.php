@@ -121,7 +121,7 @@ class Types {
     }
     function getType($identifier){
         try {
-            $query = $this->conn->prepare("SELECT * FROM types WHERE uid = :identifier");
+            $query = $this->conn->prepare("SELECT * FROM types WHERE id = :identifier OR uid = :identifier");
             $query->bindParam(":identifier", $identifier);
             if($query->execute()){
                 if($query->rowCount() > 0){

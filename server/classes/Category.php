@@ -123,7 +123,7 @@ class Category {
     }
     function getCategory($identifier){
         try {
-            $query = $this->conn->prepare("SELECT * FROM categories WHERE uid = :identifier");
+            $query = $this->conn->prepare("SELECT * FROM categories WHERE id = :identifier OR uid = :identifier");
             $query->bindParam(":identifier", $identifier);
             if($query->execute()){
                 if($query->rowCount() > 0){
