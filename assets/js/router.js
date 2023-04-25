@@ -45,7 +45,7 @@ app.config(($routeProvider, $locationProvider) => {
         templateUrl: "views/marketplace.html",
     })
     .when("/dashboard/overview", {
-        templateUrl: "views/dashboard-overview.html",
+        templateUrl: "views/dashboard/overview.html",
         resolve: {
             "check": (security, fetches) => {
                 security.isLoggedIn();
