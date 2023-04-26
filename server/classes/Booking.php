@@ -6,6 +6,7 @@ require_once("../../config/datetimeGenerator.php");
 require_once("../../config/MyJWT.php");
 // require_once("../../config/customMail.php");
 require_once("../../config/ConnectDB.php");
+require_once("Commodity.php");
 class Booking {
     public $conn;
     public $connectDB;
@@ -65,6 +66,7 @@ class Booking {
         return $output;
     }
     function getAllBookings(){
+        $commodity = new Commodity();
         try {
             $query = $this->conn->prepare("SELECT * FROM bookings LIMIT 100");
             if($query->execute()){
@@ -72,11 +74,16 @@ class Booking {
                     $output = array();
                     $bookings = $query->fetchAll(PDO::FETCH_ASSOC);
                     foreach($bookings as $booking){
+                        $commodityID = $booking["commodityID"];
                         if((int)$booking["status"] === 1){
-                            $user["status"] = true;
+                            $booking["status"] = true;
                         } else {
-                            $user["status"] = false;
+                            $booking["status"] = false;
                         }
+                        $getCommodity = $commodity->getCommodity($commodityID);
+                        $booking["commodity"] = $getCommodity;
+                        unset($booking["commodityID"]);
+                        unset($booking["userID"]);
                         $output[] = $booking;
                     }
                     if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
