@@ -485,7 +485,8 @@ app.controller("dashboard-overview-controller", function($rootScope ,$scope, $ht
         });
     }
 });
-app.controller("navbarCtrl", function($rootScope, $scope, $location){
+app.controller("navbarCtrl", function($scope, $location, $cookies){
     $scope.path = $location.path();
+    $scope.userObj = $cookies.get("bk-tokens", {path: '/'});
 });
 
