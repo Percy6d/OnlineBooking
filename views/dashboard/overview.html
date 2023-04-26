@@ -32,7 +32,7 @@
     <!-- Screen -->
     <div class="screen" xui-aside="true" xui-navbar="false">
         <section class="content xui-px-1-half xui-lg-px-3">
-            <nav menu="2" class="xui-navbar xui-d-flex xui-flex-ai-center xui-flex-jc-space-between xui-bg-white xui-px-1-half xui-lg-px-3">
+            <nav menu="2" class="xui-navbar xui-d-flex xui-flex-ai-center xui-flex-jc-space-between xui-bg-white xui-px-1-half xui-lg-px-none">
                 <div>
                     <h1 class='xui-font-sz-150 xui-lg-font-sz-200 xui-font-w-bold'>Overview</h1>
                 </div>
@@ -43,7 +43,7 @@
                     <div class="xui-w-45 xui-h-45 xui-flex-ai-center xui-flex-jc-center xui-mr-1 xui-bdr-rad-circle xui-bg-light xui-d-none xui-md-d-inline-flex">
                         <svg xmlns="http://www.w3.org/2000/svg" class="xui-opacity-6" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M5 18H19V11.0314C19 7.14806 15.866 4 12 4C8.13401 4 5 7.14806 5 11.0314V18ZM12 2C16.9706 2 21 6.04348 21 11.0314V20H3V11.0314C3 6.04348 7.02944 2 12 2ZM9.5 21H14.5C14.5 22.3807 13.3807 23.5 12 23.5C10.6193 23.5 9.5 22.3807 9.5 21Z"></path></svg>
                     </div>
-                    <div class="xui-w-50 xui-h-50 xui-bdr-rad-circle xui-bg-blue xui-bg-sz-cover xui-bg-pos-center" style="background-image: url('https://plus.unsplash.com/premium_photo-1672872328365-abb550db7237?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YWZyaWNhbiUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60');"></div>
+                    <div class="xui-w-50 xui-h-50 xui-bdr-rad-circle xui-bg-blue xui-bg-sz-cover xui-bg-pos-center" style="background-image: url('assets/images/user.png');"></div>
                     <div class="menu">
                         <span></span>
                         <span></span>
@@ -84,11 +84,11 @@
             <!-- <button class="xui-btn xui-btn-blue xui-open-sidebar xui-mt-3">Click me</button> -->
         </section>
         <div class="aside psc-bg-light-blue xui-py-2 xui-px-1-half xui-bg-white">
-            <div class="xui-bg-light-3 xui-p-1-half xui-bdr-rad-1">
+            <div class="xui-bg-light-3 xui-p-1-half xui-bdr-rad-1" ng-if="loggedInUser.firstname != null && loggedInUser.lastname != null">
                 <div class="xui-text-center">
-                    <div class="xui-w-100 xui-h-100 xui-bdr-rad-circle xui-bdr-1 xui-bdr-s-solid xui-bdr-blue xui-mx-auto xui-bg-sz-cover xui-bg-pos-center" style="background-image: url('https://plus.unsplash.com/premium_photo-1672872328365-abb550db7237?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YWZyaWNhbiUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60');"></div>
-                    <h4 class="xui-font-sz-100 xui-mb-half xui-mt-1">Richard Gigi</h4>
-                    <span class="xui-opacity-5">@richaadgigi</span>
+                    <div class="xui-w-100 xui-h-100 xui-bdr-rad-circle xui-bdr-1 xui-bdr-s-solid xui-bdr-blue xui-mx-auto xui-bg-sz-cover xui-bg-pos-center" style="background-image: url('assets/images/user.png');"></div>
+                    <h4 class="xui-font-sz-100 xui-mb-half xui-mt-1">{{loggedInUser.firstname}} {{loggedInUser.lastname}}</h4>
+                    <!-- <span class="xui-opacity-5">@richaadgigi</span> -->
                     <a href="#" class="xui-btn-block xui-btn-blue xui-mt-1-half xui-bdr-rad-5">Visit profile</a>
                 </div>
             </div>
