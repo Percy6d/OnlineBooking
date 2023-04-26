@@ -1,0 +1,138 @@
+<section class="xui-dashboard">
+    <div class="navigator xui-bg-white xui-px-1 disable-scrollbars">
+        <div class="brand xui-pt-2">
+            <div class="maxified xui-d-flex xui-flex-ai-center">
+                <a class='xui-text-inherit xui-text-dc-none' href="/">
+                    <div class='xui-pl-half'>
+                        <span class='xui-font-sz-110 xui-font-w-bold'>OnlineBooking</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="links xui-pt-2">
+            <a href='./views/admin/' class="xui-text-inherit link-box ob-link-box xui-font-sz-90 xui-px-2 xui-bdr-rad-5">
+                <span>Overview</span>
+            </a>
+            <a href='views/admin/categories' class="ob-link-box xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
+                <span>Categories</span>
+            </a>
+            <a href='views/admin/commodities' class="xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
+                <span>Commodities</span>
+            </a>
+            <a href='views/admin/types' class=" xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
+                <span>Types</span>
+            </a> 
+            <a href='views/admin/users' class="active xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
+                <span>Users</span>
+            </a> 
+            <div class="bottom-fixed xui-mt--5">
+                <a href='/' class="xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Screen -->
+    <div class="screen" xui-aside="true" xui-navbar="false" style="overflow-y: auto;">
+        <section class="main-content xui-px-1-half xui-lg-px-3">
+            <nav menu="2" class="xui-navbar xui-d-flex xui-flex-ai-center xui-flex-jc-space-between xui-bg-white xui-px-1-half xui-lg-px-3">
+                <div>
+                    <h1 class='xui-font-sz-150 xui-lg-font-sz-200 xui-font-w-bold'>{{pageTitle}}</h1>
+                </div>
+                <div class="xui-d-inline-flex xui-flex-ai-center">
+                    <div class="xui-w-45 xui-h-45 xui-flex-ai-center xui-flex-jc-center xui-mr-1 xui-bdr-rad-circle xui-bg-light xui-d-none xui-md-d-inline-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="xui-opacity-6" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M16.0503 12.0498L21 16.9996L16.0503 21.9493L14.636 20.5351L17.172 17.9988L4 17.9996V15.9996L17.172 15.9988L14.636 13.464L16.0503 12.0498ZM7.94975 2.0498L9.36396 3.46402L6.828 5.9988L20 5.99955V7.99955L6.828 7.9988L9.36396 10.5351L7.94975 11.9493L3 6.99955L7.94975 2.0498Z"></path></svg>
+                    </div>
+                    <div class="xui-w-45 xui-h-45 xui-flex-ai-center xui-flex-jc-center xui-mr-1 xui-bdr-rad-circle xui-bg-light xui-d-none xui-md-d-inline-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="xui-opacity-6" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M5 18H19V11.0314C19 7.14806 15.866 4 12 4C8.13401 4 5 7.14806 5 11.0314V18ZM12 2C16.9706 2 21 6.04348 21 11.0314V20H3V11.0314C3 6.04348 7.02944 2 12 2ZM9.5 21H14.5C14.5 22.3807 13.3807 23.5 12 23.5C10.6193 23.5 9.5 22.3807 9.5 21Z"></path></svg>
+                    </div>
+                    <div class="xui-w-50 xui-h-50 xui-bdr-rad-circle xui-bg-blue xui-bg-sz-cover xui-bg-pos-center" style="background-image: url('https://plus.unsplash.com/premium_photo-1672872328365-abb550db7237?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YWZyaWNhbiUyMHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60');"></div>
+                    <div class="menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </nav>
+            <section class="xui-mt-1 xui-pos-relative xui-px-3 xui-overflow-y-auto" style="height: 100%; min-height: 100vh;">
+                <div>
+                    <div class="table-responsive xui-my-3" data-ng-init="load()">
+                        <table class="xui-table xui-overflow-x-hidden">
+                            <div class="xui-mb-1">
+                                <h2 class="xui-font-w-normal">All Users</h2>
+                                
+                            </div>
+                            <tr class="xui-text-white xui-font-sz-90" >
+                                <th class="xui-text-left bg-primary xui-font-w-normal xui-text-fade">Full Name</th>
+                                <th class="xui-text-left xui-font-w-normal xui-text-fade">Email Address</th>
+                                <th class="xui-text-left xui-font-w-normal xui-text-fade">Mobile Number</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                  
+                                    <p class="xui-font-sz-85">Nnaemeka Chimezie</p>
+                                
+                                </td>
+                                <td>
+                                    <p class="xui-font-sz-85">nnaemekachimezie5@gmail.com</p>
+                                   
+                                </td>
+                                <td>
+                                   <p class="xui-font-sz-85">08114465549</p>
+                                </td>
+                                
+                            </tr>
+            
+                            <tr>
+                                <td>
+                                  
+                                    <p class="xui-font-sz-85">Richard Gigi</p>
+                                
+                                </td>
+                                <td>
+                                    <p class="xui-font-sz-85">gigirichardofficial@gmail.com</p>
+                                   
+                                </td>
+                                <td>
+                                   <p class="xui-font-sz-85">08145885290</p>
+                                </td>
+                                
+                            </tr>
+            
+                           
+                        </table>
+                    </div>
+                    
+                </div>
+            </section>
+
+
+            <!-- <button class="xui-btn xui-btn-blue xui-open-sidebar xui-mt-3">Click me</button> -->
+        </section>
+        
+    </div>
+</section>
+
+<section class="xui-alert xui-alert-success" xui-placed="top-right" xui-custom="successBox" centered="true" xui-anime-duration=".25" xui-anime-reverse="5">
+    <div class="xui-alert-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 6C12.5523 6 13 6.44772 13 7V13C13 13.5523 12.5523 14 12 14C11.4477 14 11 13.5523 11 13V7C11 6.44772 11.4477 6 12 6Z" fill="currentColor" /><path d="M12 16C11.4477 16 11 16.4477 11 17C11 17.5523 11.4477 18 12 18C12.5523 18 13 17.5523 13 17C13 16.4477 12.5523 16 12 16Z" fill="currentColor" /><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12Z" fill="currentColor" /></svg>
+    </div>
+    <div class="xui-alert-content">
+      <span>{{success}}</span>
+    </div>
+    <div class="xui-alert-close">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z" fill="currentColor" /></svg>
+    </div>
+</section>
+  
+<section class="xui-alert xui-alert-danger" xui-placed="bottom-right" xui-custom="errorBox" centered="true" xui-anime-duration=".25" xui-anime-reverse="3">
+    <div class="xui-alert-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 6C12.5523 6 13 6.44772 13 7V13C13 13.5523 12.5523 14 12 14C11.4477 14 11 13.5523 11 13V7C11 6.44772 11.4477 6 12 6Z" fill="currentColor" /><path d="M12 16C11.4477 16 11 16.4477 11 17C11 17.5523 11.4477 18 12 18C12.5523 18 13 17.5523 13 17C13 16.4477 12.5523 16 12 16Z" fill="currentColor" /><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12Z" fill="currentColor" /></svg>
+    </div>
+    <div class="xui-alert-content">
+        <span>{{failure}}</span>
+    </div>
+    <div class="xui-alert-close">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z" fill="currentColor" /></svg>
+    </div>
+</section>

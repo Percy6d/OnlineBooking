@@ -5,6 +5,7 @@ app.directive("customNavbar", function(){
         controller: "navbarCtrl"
     }
 });
+
 app.directive("customFooter", function(){
     return {
         restrict: "E",

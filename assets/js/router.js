@@ -54,6 +54,25 @@ app.config(($routeProvider, $locationProvider) => {
             }
         }
     })
+    .when("/views/admin/", {
+        templateUrl: "views/admin/overview.html",
+    })
+    .when("/views/admin/categories", {
+        templateUrl: "views/admin/categories.html",
+        controller: "categories-controller"
+    })
+    .when("/views/admin/commodities", {
+        templateUrl: "views/admin/commodities.html",
+        controller: "commodities-controller"
+    })
+    .when("/views/admin/types", {
+        templateUrl: "views/admin/types.html",
+        controller: "types-controller"
+    })
+    .when("/views/admin/users", {
+        templateUrl: "views/admin/users.html",
+        controller: "users-controller"
+    })
     
     .otherwise({
         templateUrl: "page-not-found.html"
