@@ -460,6 +460,12 @@ app.controller("users-controller", function($scope, $rootScope, $route, $timeout
     angular.element(document).ready(()=>{
 		xui.run();
 	});
+})
+app.controller("dashboard-overview-controller", function($rootScope, $scope){
+    $scope.user = {};
+    $scope.submitBasicInfo = () => {
+        $scope.isDisabled = true;
+    }
 });
 app.controller("navbarCtrl", function($rootScope, $scope, $location){
     $scope.path = $location.path();
