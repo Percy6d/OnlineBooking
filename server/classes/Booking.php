@@ -162,6 +162,46 @@ class Booking {
         }
         return $output;
     }
+    function getUserBookings($userID){
+        $commodity = new Commodity();
+        try {
+            $query = $this->conn->prepare("SELECT * FROM bookings WHERE userID = :userID LIMIT 100");
+            $query->bindParam(":userID", $userID);
+            if($query->execute()){
+                if($query->rowCount() > 0){
+                    $output = array();
+                    $bookings = $query->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($bookings as $booking){
+                        $commodityID = $booking["commodityID"];
+                        if((int)$booking["status"] === 1){
+                            $booking["status"] = true;
+                        } else {
+                            $booking["status"] = false;
+                        }
+                        $getCommodity = $commodity->getCommodity($commodityID);
+                        $booking["commodity"] = $getCommodity;
+                        unset($booking["commodityID"]);
+                        unset($booking["userID"]);
+                        $output[] = $booking;
+                    }
+                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
+                } else {
+                    $output = "No bookings found. Try creating one.";
+                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
+                }
+            }
+            else {
+                $output = "Something went wrong!";
+                if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(400);}
+                
+            }
+        } catch (PDOException $e) {
+            $output = "Query Failed: {$e->getMessage()}";
+            if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(400);}
+            
+        }
+        return $output;
+    }
     function getBooking($identifier){
         $commodity = new Commodity();
         try {
