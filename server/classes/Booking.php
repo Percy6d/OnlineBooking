@@ -104,5 +104,43 @@ class Booking {
         }
         return $output;
     }
+    function getBooking($identifier){
+        $commodity = new Commodity();
+        try {
+            $query = $this->conn->prepare("SELECT * FROM bookings WHERE id = :identifier OR uid = :identifier");
+            $query->bindParam(":identifier", $identifier);
+            if($query->execute()){
+                if($query->rowCount() > 0){
+                    $output = array();
+                    $booking = $query->fetch(PDO::FETCH_ASSOC);
+                    $commodityID = $booking["commodityID"];
+                    if((int)$booking["status"] === 1){
+                        $booking["status"] = true;
+                    } else {
+                        $booking["status"] = false;
+                    }
+                    $getCommodity = $commodity->getCommodity($commodityID);
+                    $booking["commodity"] = $getCommodity;
+                    unset($booking["commodityID"]);
+                    unset($booking["userID"]);
+                    $output = $booking;
+                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
+                } else {
+                    $output = "No bookings found. Try creating one.";
+                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
+                }
+            }
+            else {
+                $output = "Something went wrong!";
+                if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(400);}
+                
+            }
+        } catch (PDOException $e) {
+            $output = "Query Failed: {$e->getMessage()}";
+            if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(400);}
+            
+        }
+        return $output;
+    }
 }
 ?>
