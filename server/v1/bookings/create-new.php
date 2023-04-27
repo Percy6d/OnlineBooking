@@ -2,16 +2,16 @@
 
 ini_set("display_errors", 1);
 
-require_once("../../classes/Users.php");
+require_once("../../classes/Booking.php");
 
 $getData = json_decode(file_get_contents("php://input", true));
 if(!empty($getData)){
-    $users = new Users();
-    $newUser = $users->newUser($getData);
-    if(is_array($newUser) || is_object($newUser)){
-        echo json_encode($newUser);
+    $booking = new Booking();
+    $newBooking = $booking->newBooking($getData);
+    if(is_array($newBooking) || is_object($newBooking)){
+        echo json_encode($newBooking);
     } else {
-        echo $newUser;
+        echo $newBooking;
     }
 } else {
     echo json_encode("Empty post data");
