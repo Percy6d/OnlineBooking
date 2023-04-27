@@ -447,46 +447,89 @@ app.controller("users-controller", function($scope, $rootScope, $route, $timeout
         }
     })
     .then((success) => {
+        console.log(success);
         $scope.getAllUsers = success.data;
         console.log($scope.getAllUsers);
-        $timeout(() =>{
-            xui.reveal.images();
-            
-        })
     }, (error) => {
-        // console.log(error);
+        console.log(error);
     });
 
     angular.element(document).ready(()=>{
 		xui.run();
 	});
 })
-app.controller("dashboard-overview-controller", function($rootScope ,$scope, $http, $route, $timeout){
-    $scope.user = {};
-    $scope.submitBasicInfo = () => {
-        $scope.isDisabled = true;
-        $scope.user.uid = $rootScope.loggedInUser.uid;
+
+app.controller("bookings-controller", function($scope, $rootScope, $route, $timeout, $http){
+    $rootScope.pageTitle = "Bookings";
+    $http({
+        "method": "GET",
+        "url": "server/v1/bookings/fetch-all",
+        "header": {
+            "Content-Type": "application/json"
+        }
+    })
+    .then((success) => {
+        $scope.getAllBookings = success.data;
+        console.log($scope.getAllBookings);
+        $timeout(() =>{
+            xui.reveal.images();
+            
+        })
+    }, (error) => {
+        console.log(error);
+    });
+    
+    $scope.booking = {};
+    $scope.addBookings = () => {
+        
+        console.log($scope.booking.name);
         $http({
-            "method": "PATCH",
-            "url": "server/v1/users/update-basic-info",
-            "data": $scope.user,
+            "method": "POST",
+            "url": "server/v1/Bookings/create-new",
+            "data": {
+                "name": $scope.booking.name
+            },
             "header": {
                 "Content-Type": "application/json"
             }
         })
         .then((success) => {
-            console.log(success.data);
+            console.log(success);
+            $scope.getAllBookings = success.data;
+            console.log($scope.getAllBookings);
+            xui.animate.default("successBox"); 
+            $scope.success = $scope.getAllBookings;
             $timeout(() => {
-                $route.reload();
-            }, 2000);
+            $route.reload();
+            }, 2000)
+            $timeout(() =>{
+                xui.reveal.images();
+                
+            })
         }, (error) => {
-            $scope.isDisabled = false;
-            // console.log(error);
+            console.log(error);
+            ;
         });
     }
+
+    $scope.showBookings = (booking) => {
+        $scope.bookingName = booking.name;
+        $scope.bookingUID = booking.uid;
+        console.log( $scope.bookingName,  $scope.bookingUID);
+    }
+
+
+    angular.element(document).ready(()=>{
+		xui.run();
+	});
 });
-app.controller("navbarCtrl", function($scope, $location, $cookies){
+app.controller("dashboard-overview-controller", function($rootScope, $scope){
+    $scope.user = {};
+    $scope.submitBasicInfo = () => {
+        $scope.isDisabled = true;
+    }
+});
+app.controller("navbarCtrl", function($rootScope, $scope, $location){
     $scope.path = $location.path();
-    $scope.userObj = $cookies.get("bk-tokens", {path: '/'});
 });
 

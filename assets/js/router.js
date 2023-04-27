@@ -74,6 +74,10 @@ app.config(($routeProvider, $locationProvider) => {
         templateUrl: "views/admin/users.html",
         controller: "users-controller"
     })
+    .when("/views/admin/bookings", {
+        templateUrl: "views/admin/bookings.html",
+        controller: "bookings-controller"
+    })
     
     .otherwise({
         templateUrl: "page-not-found.html"
