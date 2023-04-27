@@ -33,14 +33,7 @@
                             <h3 class="xui-font-sz-95 xui-font-w-bold">User</h3>
                             <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{bookingsDetails.commodity.user.firstname}} {{bookingsDetails.commodity.user.lastname}}</span>
                         </div>
-                        <div>
-                            <h3 class="xui-font-sz-95 xui-font-w-bold">Date Booked</h3>
-                            <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">From {{bookingsDetails.dateFrom | date}} To {{bookingsDetails.dateTo | date}}</span>
-                        </div>
-                        <div>
-                            <h3 class="xui-font-sz-95 xui-font-w-bold">Booking Status</h3>
-                            <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{bookingsDetails.status == true ? 'Verified' : 'Not Verified'}}</span>
-                        </div>
+                        
                         <div>
                             <h3 class="xui-font-sz-95 xui-font-w-bold">Commodity Status</h3>
                             <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{bookingsDetails.commodity.status == true ? 'Verified' : 'Not Verified'}}</span>

@@ -121,6 +121,7 @@ app.controller("marketplace-controller", function($scope, $rootScope, $route, $t
     });
     
     $scope.filterCategory = (selectCat) => {
+        // xui.modal.hide("filterCategoryModal");
         console.log(selectCat);
         $http({
             "method": "GET",
@@ -133,11 +134,17 @@ app.controller("marketplace-controller", function($scope, $rootScope, $route, $t
             $scope.bookings = success.data;
             for(let i=0; i < $scope.bookings.length; i++){
                 if(selectCat.id == $scope.bookings[i].commodity.category.id){
-                    $scope.bookings[i] = $scope.selectCat;
+                    $scope.bookings[i].id = selectCat.id;
+                    
+                    $timeout(() =>{
+                        xui.reveal.images();
+                        
+                    })
                     console.log("Yes");
                     // console.log($scope.bookings[i]);
                 }
                 else{
+                    $scope.bookings.length = 0;
                     console.log("No");
                 }
                 
