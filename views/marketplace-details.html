@@ -17,8 +17,8 @@
                 </div>
                 
             </div>
-            <div class="xui-col-12 xui-lg-col-4 xui-lg-pl-1">
-                <h2 class="xui-font-w-normal">Details about <span class="xui-font-w-bold">{{bookingsDetails.commodity.name}}</span></h2>
+            <div class="xui-col-12 xui-lg-col-4 xui-lg-pl-1 xui-mt-3 xui-lg-mt-none">
+                <!-- <h2 class="xui-font-w-normal xui-mb-2">Details about <span class="xui-font-w-bold">{{bookingsDetails.commodity.name}}</span></h2> -->
                 <div class="xui-bdr-w-1 xui-bdr-fade xui-bdr-s-solid xui-p-1">
                     <div class="xui-py-1 xui-px-half xui-d-grid xui-grid-col-2 xui-grid-gap-1">
                         <div>
@@ -44,6 +44,23 @@
                         <h4 class="xui-mt-1-half xui-opacity-8 xui-font-sz-90 xui-font-w-normal">$100 per hour</h4> -->
                     </div>
                 </div>
+                <p class="xui-mt-2 xui-font-w-bold xui-font-sz-150">NGN {{bookingsDetails.commodity.price | currency:'':0}} <span class="xui-opacity-8 xui-font-w-normal xui-font-sz-80">per day</span></p>
+                <form class="xui-form" name="bookForm" ng-submit="bookNow()" novalidate>
+                    <div class="xui-form-box">
+                        <input type="date" name="datefrom" id="" ng-model="bookData.dateFrom" required>
+                        <span ng-if="bookForm.datefrom.$touched && bookForm.datefrom.$error.required" class="xui-form-error-msg">Enter a date</span>
+                    </div>
+                    <div class="xui-form-box xui-text-center">
+                        <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.0001 19.1643L18.2072 12.9572L16.793 11.543L12.0001 16.3359L7.20718 11.543L5.79297 12.9572L12.0001 19.1643ZM12.0001 13.5144L18.2072 7.30728L16.793 5.89307L12.0001 10.686L7.20718 5.89307L5.79297 7.30728L12.0001 13.5144Z"></path></svg>
+                    </div>
+                    <div class="xui-form-box">
+                        <input type="date" name="dateto" id="" ng-model="bookData.dateTo" required>
+                        <span ng-if="bookForm.dateto.$touched && bookForm.dateto.$error.required" class="xui-form-error-msg">Enter a date</span>
+                    </div>
+                    <div class="xui-form-box">
+                        <button type="submit" class="xui-btn-block xui-btn-blue xui-bdr-rad-5" ng-disabled="!bookForm.$valid">Book this now</button>
+                    </div>
+                </form>
             </div>
         </div>
 

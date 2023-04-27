@@ -47,7 +47,13 @@ app.config(($routeProvider, $locationProvider) => {
     })
     .when("/marketplace-details/:identifier", {
         templateUrl: "views/marketplace-details.html",
-        controller: "marketplace-details-controller"
+        controller: "marketplace-details-controller",
+        resolve: {
+            "check": (security, fetches) => {
+                security.refreshToken();
+                fetches.userDetails();
+            }
+        }
     })
     .when("/dashboard/overview", {
         templateUrl: "views/dashboard/overview.html",

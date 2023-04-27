@@ -160,7 +160,8 @@ app.controller("marketplace-controller", function($scope, $rootScope, $route, $t
 	});
 });
 
-app.controller("marketplace-details-controller", function($scope, $rootScope, $route, $routeParams, $timeout, $http){
+app.controller("marketplace-details-controller", function($scope, $rootScope, $location, $cookies, $routeParams, $timeout, $http){
+    $scope.bookData = {};
     $http({
         "method": "POST",
         "url": "server/v1/bookings/fetch",
@@ -181,7 +182,61 @@ app.controller("marketplace-details-controller", function($scope, $rootScope, $r
     }, (error) => {
         console.log(error);
     });
-
+    // a and b are javascript Date objects
+    function dateDiffInDays(a, b) {
+        const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+        // Discard the time and time-zone information.
+        const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+        const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+    
+        return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+    }
+    function payWithPaystack(amount) {
+        let handler = PaystackPop.setup({
+            key: 'pk_test_eb4f265077adbc7c1d3ef73be8fa77503c8a3a8a', // Replace with your public key
+            email: "percy6d@gmail.com",
+            amount: amount * 100,
+            // ref: 'ref-'+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+            // label: "Optional string that replaces customer email"
+            onClose: function(){
+            alert('Cancelling booking...');
+            },
+            callback: function(response){
+            let message = 'Payment complete! Reference: ' + response.reference;
+            alert(message);
+            $http({
+                "method": "POST",
+                "url": "server/v1/bookings/create-new",
+                "data": $scope.bookData,
+                "header": {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then((success) => {
+                console.log(success.data);
+                $timeout(() =>{
+                    $location.path("dashboard/overview");
+                })
+            }, (error) => {
+                console.log(error);
+            });
+            }
+        });
+        handler.openIframe();
+    }
+    $scope.bookNow = () => {
+        let tokenCookie = $cookies.get("bk-tokens", {path: '/'});
+        if(tokenCookie === undefined || tokenCookie.length <= 2){
+            alert("Please log in before creating a booking");
+        } else {
+            $scope.bookData.commodityID = $scope.bookingsDetails.commodity.id;
+            $scope.bookData.userID = $rootScope.loggedInUser.id;
+            const a = new Date($scope.bookData.dateFrom),
+            b = new Date($scope.bookData.dateTo),
+            difference = dateDiffInDays(a, b);
+            payWithPaystack($scope.bookingsDetails.commodity.price * difference);
+        }
+    }
 
     angular.element(document).ready(()=>{
 		xui.run();
