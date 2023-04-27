@@ -443,16 +443,13 @@ app.controller("users-controller", function($scope, $rootScope, $route, $timeout
         "method": "GET",
         "url": "server/v1/users/fetch-all",
         "header": {
-            "Content-Type": "application/json"
+            "Content-Type": undefined
         }
     })
     .then((success) => {
+        console.log(success);
         $scope.getAllUsers = success.data;
         console.log($scope.getAllUsers);
-        $timeout(() =>{
-            xui.reveal.images();
-            
-        })
     }, (error) => {
         console.log(error);
     });
