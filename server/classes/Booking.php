@@ -65,6 +65,64 @@ class Booking {
         }
         return $output;
     }
+    function verifyBooking($uid){
+        $dateTimeGenerate = new DateTimeGenerator();
+        $dateTimeUTC = $dateTimeGenerate->toUTC();
+        if(!isset($uid)){
+            if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(406);}
+            exit("No uid property was found in your object");
+        }
+        try {
+            $status = 1;
+            $query = $this->conn->prepare("UPDATE bookings SET status = :status, timeUpdated = :timeUpdated WHERE uid = :uid");
+            $query->bindParam(":uid", $uid);
+            $query->bindParam(":status", $status);
+            $query->bindParam(":timeUpdated", $dateTimeUTC);
+            if($query->execute()){
+                $output = "UID \"". $uid ."\" has been been verified";
+                if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
+            }
+            else {
+                $output = "Something went wrong!";
+                if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(400);}
+                
+            }
+        } catch (PDOException $e) {
+            $output = "Query Failed: {$e->getMessage()}";
+            if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(400);}
+            
+        }
+        return $output;
+    }
+    function flagBooking($uid){
+        $dateTimeGenerate = new DateTimeGenerator();
+        $dateTimeUTC = $dateTimeGenerate->toUTC();
+        if(!isset($uid)){
+            if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(406);}
+            exit("No uid property was found in your object");
+        }
+        try {
+            $status = 0;
+            $query = $this->conn->prepare("UPDATE bookings SET status = :status, timeUpdated = :timeUpdated WHERE uid = :uid");
+            $query->bindParam(":uid", $uid);
+            $query->bindParam(":status", $status);
+            $query->bindParam(":timeUpdated", $dateTimeUTC);
+            if($query->execute()){
+                $output = "UID \"". $uid ."\" has been been flagged";
+                if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
+            }
+            else {
+                $output = "Something went wrong!";
+                if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(400);}
+                
+            }
+        } catch (PDOException $e) {
+            $output = "Query Failed: {$e->getMessage()}";
+            if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(400);}
+            
+        }
+        return $output;
+    }
     function getAllBookings(){
         $commodity = new Commodity();
         try {
