@@ -164,55 +164,6 @@ class Commodity {
         }
         return $output;
     }
-    function getCommodity($identifier){
-        $category = new Category();
-        $types = new Types();
-        $users = new Users();
-        try {
-            $query = $this->conn->prepare("SELECT * FROM commodities WHERE id = :identifier OR uid = :identifier");
-            $query->bindParam(":identifier", $identifier);
-            if($query->execute()){
-                if($query->rowCount() > 0){
-                    $commodity = $query->fetch(PDO::FETCH_ASSOC);
-                    if($commodity["status"] == 1){
-                        $commodity["status"] = true;
-                    } else {
-                        $commodity["status"] = false;
-                    }
-                    $commodityID = $commodity["id"];
-                    $categoryID = $commodity["categoryID"];
-                    $typeID = $commodity["typeID"];
-                    $userID = $commodity["userID"];
-                    $getCategory = $category->getCategory($categoryID);
-                    $commodity["category"] = $getCategory;
-                    $getType = $types->getType($typeID);
-                    $commodity["type"] = $getType;
-                    $getDetails = $users->getDetails($userID);
-                    $commodity["user"] = $getDetails;
-                    $commodityImages = $this->getAllCommodityImages($commodityID);
-                    $commodity["images"] = $commodityImages;
-                    unset($commodity["categoryID"]);
-                    unset($commodity["typeID"]);
-                    unset($commodity["userID"]);
-                    $output = $commodity;
-                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
-                } else {
-                    $output = "No commodity found. Try creating one.";
-                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
-                }
-            }
-            else {
-                $output = "Something went wrong!";
-                if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(400);}
-                
-            }
-        } catch (PDOException $e) {
-            $output = "Query Failed: {$e->getMessage()}";
-            if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(400);}
-            
-        }
-        return $output;
-    }
     function getAllCommodities(){
         $category = new Category();
         $types = new Types();
@@ -246,6 +197,55 @@ class Commodity {
                         unset($commodity["userID"]);
                         $output[] = $commodity;
                     }
+                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
+                } else {
+                    $output = "No commodity found. Try creating one.";
+                    if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
+                }
+            }
+            else {
+                $output = "Something went wrong!";
+                if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(400);}
+                
+            }
+        } catch (PDOException $e) {
+            $output = "Query Failed: {$e->getMessage()}";
+            if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(400);}
+            
+        }
+        return $output;
+    }
+    function getCommodity($identifier){
+        $category = new Category();
+        $types = new Types();
+        $users = new Users();
+        try {
+            $query = $this->conn->prepare("SELECT * FROM commodities WHERE id = :identifier OR uid = :identifier");
+            $query->bindParam(":identifier", $identifier);
+            if($query->execute()){
+                if($query->rowCount() > 0){
+                    $commodity = $query->fetch(PDO::FETCH_ASSOC);
+                    if($commodity["status"] == 1){
+                        $commodity["status"] = true;
+                    } else {
+                        $commodity["status"] = false;
+                    }
+                    $commodityID = $commodity["id"];
+                    $categoryID = $commodity["categoryID"];
+                    $typeID = $commodity["typeID"];
+                    $userID = $commodity["userID"];
+                    $getCategory = $category->getCategory($categoryID);
+                    $commodity["category"] = $getCategory;
+                    $getType = $types->getType($typeID);
+                    $commodity["type"] = $getType;
+                    $getDetails = $users->getDetails($userID);
+                    $commodity["user"] = $getDetails;
+                    $commodityImages = $this->getAllCommodityImages($commodityID);
+                    $commodity["images"] = $commodityImages;
+                    unset($commodity["categoryID"]);
+                    unset($commodity["typeID"]);
+                    unset($commodity["userID"]);
+                    $output = $commodity;
                     if($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE' || $_SERVER['REQUEST_METHOD'] == 'PUT' || $_SERVER['REQUEST_METHOD'] == 'PATCH' || $_SERVER['REQUEST_METHOD'] == 'DELETE'){http_response_code(200);}
                 } else {
                     $output = "No commodity found. Try creating one.";
