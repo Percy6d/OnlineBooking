@@ -89,6 +89,10 @@ app.config(($routeProvider, $locationProvider) => {
         templateUrl: "views/admin/bookings.html",
         controller: "bookings-controller"
     })
+    .when("/views/admin/payment-history", {
+        templateUrl: "views/admin/payment-history.html",
+        controller: "payment-history-controller"
+    })
     
     .otherwise({
         templateUrl: "page-not-found.html"
