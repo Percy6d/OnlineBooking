@@ -81,6 +81,57 @@ app.controller("login-controller", function($rootScope, $scope, $http, $cookies,
         });
     }
 });
+app.controller("marketplace-controller", function($scope, $rootScope, $route, $timeout, $http){
+    $http({
+        "method": "GET",
+        "url": "server/v1/bookings/fetch-all",
+        "header": {
+            "Content-Type": "application/json"
+        }
+    })
+    .then((success) => {
+        $scope.bookings = success.data;
+        console.log($scope.bookings);
+        $timeout(() =>{
+            xui.reveal.images();
+            
+        })
+    }, (error) => {
+        console.log(error);
+    });
+
+    angular.element(document).ready(()=>{
+		xui.run();
+	});
+});
+
+app.controller("marketplace-details-controller", function($scope, $rootScope, $route, $routeParams, $timeout, $http){
+    $http({
+        "method": "POST",
+        "url": "server/v1/bookings/fetch",
+        "data": {
+            "identifier": $routeParams.identifier
+        },
+        "header": {
+            "Content-Type": "application/json"
+        }
+    })
+    .then((success) => {
+        $scope.bookingsDetails = success.data;
+        console.log($scope.bookingsDetails);
+        $timeout(() =>{
+            xui.reveal.images();
+            
+        })
+    }, (error) => {
+        console.log(error);
+    });
+
+
+    angular.element(document).ready(()=>{
+		xui.run();
+	});
+});
 app.controller("services-controller", function($scope, $http){
     $http({
         "method": "GET",
@@ -463,6 +514,42 @@ app.controller("bookings-controller", function($scope, $rootScope, $route, $time
     $rootScope.pageTitle = "Bookings";
     $http({
         "method": "GET",
+        "url": "server/v1/commodities/fetch-all",
+        "header": {
+            "Content-Type": "application/json"
+        }
+    })
+    .then((success) => {
+        $scope.getCommodities = success.data;
+        console.log($scope.getCommodities);
+        $timeout(() =>{
+            xui.reveal.images();
+            
+        })
+    }, (error) => {
+        console.log(error);
+    });
+
+    $http({
+        "method": "GET",
+        "url": "server/v1/users/fetch-all",
+        "header": {
+            "Content-Type": "application/json"
+        }
+    })
+    .then((success) => {
+        $scope.getUsers = success.data;
+        console.log($scope.getUsers);
+        $timeout(() =>{
+            xui.reveal.images();
+            
+        })
+    }, (error) => {
+        console.log(error);
+    });
+
+    $http({
+        "method": "GET",
         "url": "server/v1/bookings/fetch-all",
         "header": {
             "Content-Type": "application/json"
@@ -480,15 +567,17 @@ app.controller("bookings-controller", function($scope, $rootScope, $route, $time
     });
     
     $scope.booking = {};
-    $scope.addBookings = () => {
-        
-        console.log($scope.booking.name);
+    $scope.addBookings = (commodityid, userid) => {
+        $scope.commodityid = commodityid
+        $scope.userid = userid;
+        console.log($scope.booking.dateFrom, $scope.booking.dateTo, $scope.commodityid, $scope.userid);
+        $scope.booking.commodityID = $scope.commodityid;
+        $scope.booking.userID = $scope.userid;
+        console.log($scope.booking);
         $http({
             "method": "POST",
             "url": "server/v1/Bookings/create-new",
-            "data": {
-                "name": $scope.booking.name
-            },
+            "data": $scope.booking,
             "header": {
                 "Content-Type": "application/json"
             }
@@ -498,7 +587,7 @@ app.controller("bookings-controller", function($scope, $rootScope, $route, $time
             $scope.getAllBookings = success.data;
             console.log($scope.getAllBookings);
             xui.animate.default("successBox"); 
-            $scope.success = $scope.getAllBookings;
+            $scope.success = "Bookings created"
             $timeout(() => {
             $route.reload();
             }, 2000)

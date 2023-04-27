@@ -43,6 +43,11 @@ app.config(($routeProvider, $locationProvider) => {
     })
     .when("/marketplace", {
         templateUrl: "views/marketplace.html",
+        controller: "marketplace-controller"
+    })
+    .when("/marketplace-details/:identifier", {
+        templateUrl: "views/marketplace-details.html",
+        controller: "marketplace-details-controller"
     })
     .when("/dashboard/overview", {
         templateUrl: "views/dashboard/overview.html",

@@ -13,5 +13,34 @@
         <span class="xui-font-sz-150 xui-lg-font-sz-250">Explore</span>
         <span class="xui-opacity-5 xui-font-sz-85 xui-mb-half xui-ml-1">5,500 items</span>
     </div>
+    <div class="xui-d-grid xui-grid-col-1 xui-lg-grid-col-3 xui-grid-gap-1">
+        <div class="xui-bg-white xui-box-shadow-3 xui-bdr-rad-1 xui-p-half" ng-repeat="booking in bookings">
+            <div class="xui-bg-sz-cover xui-bg-pos-center xui-w-fluid-100 xui-h-200 xui-bdr-rad-half" style="background-image: url('https://images.unsplash.com/photo-1623701173792-89aeb410c1a0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aHB8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60');">
+                <a class="xui-d-block xui-w-fluid-100 xui-h-fluid-100" href="marketplace-details/{{booking.uid}}"></a>
+            </div>
+            <div class="xui-py-1 xui-px-half xui-d-grid xui-grid-col-2 xui-grid-gap-1">
+                <div>
+                    <h3 class="xui-font-sz-95 xui-font-w-bold">Category</h3>
+                    <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{booking.commodity.category.name}}</span>
+                </div>
+                <div>
+                    <h3 class="xui-font-sz-95 xui-font-w-bold">Type</h3>
+                    <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{booking.commodity.type.name}}</span>
+                </div>
+                <div>
+                    <h3 class="xui-font-sz-95 xui-font-w-bold">User</h3>
+                    <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{booking.commodity.user.firstname}} {{booking.commodity.user.lastname}}</span>
+                </div>
+                <div>
+                    <h3 class="xui-font-sz-95 xui-font-w-bold">Date Booked</h3>
+                    <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">From {{booking.dateFrom | date}} To {{booking.dateTo | date}}</span>
+                </div>
+                
+                <!-- <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{booking.commodity.category.name}}</span>
+                <h2 class="xui-font-sz-100 xui-lg-font-sz-120 xui-w-fluid-80">{{booking.commodity.name}}</h2>
+                <h4 class="xui-mt-1-half xui-opacity-8 xui-font-sz-90 xui-font-w-normal">$100 per hour</h4> -->
+            </div>
+        </div>
+    </div>
 </section>
 <custom-footer></custom-footer>
