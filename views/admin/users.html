@@ -62,43 +62,29 @@
                                 <h2 class="xui-font-w-normal">All Users</h2>
                                 
                             </div>
+                            <div class="xui-my-2">
+                                <input class="xui-form-input" type="text" ng-model="searchUser" placeholder="Search user..." />
+                            </div>
                             <tr class="xui-text-white xui-font-sz-90" >
                                 <th class="xui-text-left bg-primary xui-font-w-normal xui-text-fade">Full Name</th>
                                 <th class="xui-text-left xui-font-w-normal xui-text-fade">Email Address</th>
                                 <th class="xui-text-left xui-font-w-normal xui-text-fade">Mobile Number</th>
                             </tr>
-                            <tr>
+                            <tr ng-repeat="user in getAllUsers | filter:searchUser">
                                 <td>
                                   
-                                    <p class="xui-font-sz-85">Nnaemeka Chimezie</p>
+                                    <p class="xui-font-sz-85">{{user.firstname}} {{user.lastname}}</p>
                                 
                                 </td>
                                 <td>
-                                    <p class="xui-font-sz-85">nnaemekachimezie5@gmail.com</p>
+                                    <p class="xui-font-sz-85">{{user.emailAddress}}</p>
                                    
                                 </td>
                                 <td>
-                                   <p class="xui-font-sz-85">08114465549</p>
+                                   <p class="xui-font-sz-85">{{user.mobileNumber}}</p>
                                 </td>
                                 
                             </tr>
-            
-                            <tr>
-                                <td>
-                                  
-                                    <p class="xui-font-sz-85">Richard Gigi</p>
-                                
-                                </td>
-                                <td>
-                                    <p class="xui-font-sz-85">gigirichardofficial@gmail.com</p>
-                                   
-                                </td>
-                                <td>
-                                   <p class="xui-font-sz-85">08145885290</p>
-                                </td>
-                                
-                            </tr>
-            
                            
                         </table>
                     </div>

@@ -443,7 +443,7 @@ app.controller("users-controller", function($scope, $rootScope, $route, $timeout
         "method": "GET",
         "url": "server/v1/users/fetch-all",
         "header": {
-            "Content-Type": undefined
+            "Content-Type": "application/json"
         }
     })
     .then((success) => {
@@ -451,39 +451,20 @@ app.controller("users-controller", function($scope, $rootScope, $route, $timeout
         $scope.getAllUsers = success.data;
         console.log($scope.getAllUsers);
     }, (error) => {
-        // console.log(error);
+        console.log(error);
     });
 
     angular.element(document).ready(()=>{
 		xui.run();
 	});
 })
-app.controller("dashboard-overview-controller", function($rootScope ,$scope, $http, $route, $timeout){
+app.controller("dashboard-overview-controller", function($rootScope, $scope){
     $scope.user = {};
     $scope.submitBasicInfo = () => {
         $scope.isDisabled = true;
-        $scope.user.uid = $rootScope.loggedInUser.uid;
-        $http({
-            "method": "PATCH",
-            "url": "server/v1/users/update-basic-info",
-            "data": $scope.user,
-            "header": {
-                "Content-Type": "application/json"
-            }
-        })
-        .then((success) => {
-            console.log(success.data);
-            $timeout(() => {
-                $route.reload();
-            }, 2000);
-        }, (error) => {
-            $scope.isDisabled = false;
-            // console.log(error);
-        });
     }
 });
-app.controller("navbarCtrl", function($scope, $location, $cookies){
+app.controller("navbarCtrl", function($rootScope, $scope, $location){
     $scope.path = $location.path();
-    $scope.userObj = $cookies.get("bk-tokens", {path: '/'});
 });
 
