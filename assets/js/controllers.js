@@ -121,7 +121,7 @@ app.controller("marketplace-controller", function($scope, $rootScope, $route, $t
     });
     
     $scope.filterCategory = (selectCat) => {
-        xui.modal.hide("filterCategoryModal");
+        // xui.modal.hide("filterCategoryModal");
         console.log(selectCat);
         $http({
             "method": "GET",
