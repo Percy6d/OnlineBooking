@@ -77,14 +77,14 @@
             </section>
             
             <section class="xui-modal" xui-modal="addCommoditiesModal">
-                <div class="xui-modal-content xui-bdr-rad-half" style="padding: 0;">
+                <div class="xui-modal-content xui-bdr-rad-half xui-h-600 xui-overflow-y-auto" style="padding: 0;">
                 <div class="xui-py-1 xui-pl-half" style="background: #000000;">
                     <h2 class="xui-font-w-normal xui-font-sz-100 xui-text-white">Add New Commodities</h2>
                 </div>
                 <form class="xui-p-2" name="addCommoditiesForm" novalidate>
                     <div class="xui-mb-1">
                         <label class="xui-opacity-5 xui-form-label xui-font-w-bold">Commodity Name</label>
-                        <input type="text" name="categoryname" ng-model="cat.name" style="background: var(--primary-light-ii); padding: 1.2rem;" class="xui-bdr-rad-half xui-form-input xui-font-w-bold" required />
+                        <input type="text" name="categoryname" ng-model="commodityName" style="background: var(--primary-light-ii); padding: 1.2rem;" class="xui-bdr-rad-half xui-form-input xui-font-w-bold" required />
                         
                     </div>
                     <div class="xui-mb-1">
@@ -103,19 +103,19 @@
                     </div>
 
                     <div class="xui-mb-1">
-                        <div>
-                            <label class="xui-opacity-5 xui-form-label xui-font-w-bold">Enter an image URL</label>
-                            <input type="text" name="categoryname" ng-model="cat.name" style="background: var(--primary-light-ii); padding: 1.2rem;" class="xui-bdr-rad-half xui-form-input xui-font-w-bold" required />
+                        <div ng-repeat="image in imageURLArray track by $index">
+                            <label class="xui-opacity-5 xui-form-label xui-font-w-bold">image URL</label>
+                            <input type="text" name="categoryname" ng-model="image" style="background: var(--primary-light-ii); padding: 1.2rem;" class="xui-bdr-rad-half xui-form-input xui-font-w-bold"/>
                             
                         </div>
-                        <div class="xui-btn xui-text-white" style="background: #000;">Enter image URL</div>
-                        
+                    </div>
+                    <div class="xui-mb-1">
+                        <div class="xui-btn xui-bdr-rad-half xui-text-white" xui-modal-open="addImageModal" style="background: #000;" ng-if="imageURLArray.length < 5">{{imageURLArray.length == 0 ? 'Enter image URL' : 'Enter another URL'}}</div>
                     </div>
               
                     <div class="xui-d-grid xui-grid-col-2 xui-grid-gap-2">
-                      <button class="xui-btn xui-bdr-rad-half xui-text-white" ng-click="addCategoriesForm.$valid && addCategories()" style="background: #C05640;">
-                          <i ng-if="isCategoryDisabled" class="gg-spinner-alt xui-mx-auto xui-d-inline-block"></i>
-                          <span ng-if="!isCategoryDisabled">Click to Add</span>
+                      <button class="xui-btn xui-bdr-rad-half xui-text-white" ng-click="addCommodity(commodityName, selectUser.id, selectCategory.id, selectType.id)" style="background: #C05640;">
+                        <span>Click to Add</span>
                       </button>
                       <!-- <button type="submit" ng-click="addRoles()">add</button> -->
                       <button class="xui-btn xui-text-black xui-mr-1 xui-bdr-rad-half" xui-modal-close="addCategoriesModal" style="border: 1px solid lightgray;">Cancel</button>
@@ -132,7 +132,19 @@
         
     </div>
 </section>
-
+<div class="xui-modal" xui-modal="addImageModal">
+    <div class="xui-modal-content xui-bdr-rad-half">
+        <div class="xui-mb-1">
+            <label class="xui-opacity-5 xui-form-label xui-font-w-bold">Enter an image URL</label>
+            <input type="text" name="categoryname" ng-model="newImage.url" style="background: var(--primary-light-ii); padding: 1.2rem;" class="xui-bdr-rad-half xui-form-input xui-font-w-bold" required />
+            
+        </div>
+        <button class="xui-btn xui-bdr-rad-half xui-text-white" xui-modal-close="addImageModal" ng-click="addImages()" style="background: #C05640;">
+            <span>Select</span>
+        </button>
+    </div>
+    
+</div>
 <section class="xui-alert xui-alert-success" xui-placed="top-right" xui-custom="successBox" centered="true" xui-anime-duration=".25" xui-anime-reverse="5">
     <div class="xui-alert-icon">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 6C12.5523 6 13 6.44772 13 7V13C13 13.5523 12.5523 14 12 14C11.4477 14 11 13.5523 11 13V7C11 6.44772 11.4477 6 12 6Z" fill="currentColor" /><path d="M12 16C11.4477 16 11 16.4477 11 17C11 17.5523 11.4477 18 12 18C12.5523 18 13 17.5523 13 17C13 16.4477 12.5523 16 12 16Z" fill="currentColor" /><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12Z" fill="currentColor" /></svg>

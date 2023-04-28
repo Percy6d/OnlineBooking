@@ -765,7 +765,7 @@ app.controller("host-overview-controller", function($rootScope, $timeout, $http,
         
 	});
 });
-app.controller("host-commodities-controller", function($rootScope, $timeout, $http, $scope){
+app.controller("host-commodities-controller", function($rootScope, $route, $timeout, $http, $scope){
     $rootScope.pageTitle = "Commodities";
 
     $http({
@@ -830,6 +830,57 @@ app.controller("host-commodities-controller", function($rootScope, $timeout, $ht
     }, (error) => {
         console.log(error);
     });
+
+    $scope.newImage = {};
+    $scope.imageURLArray = [];
+    $scope.addImages = function() {
+        $scope.imageURLArray.push(angular.copy($scope.newImage.url));
+        $scope.newImage = {};
+        console.log($scope.imageURLArray);
+    };
+
+    $scope.addCommodity = (commodityname, categoryid, userid, typeid) => {
+        $scope.commodityName = commodityname;
+        $scope.categoryID = categoryid;
+        $scope.userID = userid;
+        $scope.typeID = typeid;
+
+
+        console.log($scope.commodityName, $scope.categoryID, $scope.userID, $scope.typeID);
+        $http({
+            "method": "POST",
+            "url": "server/v1/commodities/create-new",
+            "data": {
+                "name": "Welding",
+                "userID": 2,
+                "categoryID": 3,
+                "typeID": 1,
+                "images": [
+                    "https://images.pexels.com/photos/11129922/pexels-photo-11129922.jpeg?auto=compress&cs=tinysrgb&w=600",
+                    "https://images.pexels.com/photos/16254610/pexels-photo-16254610.jpeg?auto=compress&cs=tinysrgb&w=600",
+                    "https://images.pexels.com/photos/13791390/pexels-photo-13791390.jpeg?auto=compress&cs=tinysrgb&w=600"
+                ]
+            },
+            "header": {
+                "Content-Type": "application/json"
+            }
+        })
+        .then((success) => {
+            console.log(success);
+            xui.animate.default("successBox"); 
+            $scope.success = "Commodity created";
+            $timeout(() => {
+                $route.reload();
+            }, 2000)
+            $timeout(() =>{
+                xui.reveal.images();
+                
+            })
+        }, (error) => {
+            console.log(error);
+            isCategoryDisabled = false;
+        });
+    }
 
     angular.element(document).ready(()=>{
 		xui.run();
