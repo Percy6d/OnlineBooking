@@ -839,7 +839,7 @@ app.controller("host-commodities-controller", function($rootScope, $route, $time
         console.log($scope.imageURLArray);
     };
 
-    $scope.addCommodity = (commodityname, categoryid, userid, typeid) => {
+    $scope.addCommodity = (commodityname, userid, categoryid, typeid) => {
         $scope.commodityName = commodityname;
         $scope.categoryID = categoryid;
         $scope.userID = userid;
@@ -851,15 +851,11 @@ app.controller("host-commodities-controller", function($rootScope, $route, $time
             "method": "POST",
             "url": "server/v1/commodities/create-new",
             "data": {
-                "name": "Welding",
-                "userID": 2,
-                "categoryID": 3,
-                "typeID": 1,
-                "images": [
-                    "https://images.pexels.com/photos/11129922/pexels-photo-11129922.jpeg?auto=compress&cs=tinysrgb&w=600",
-                    "https://images.pexels.com/photos/16254610/pexels-photo-16254610.jpeg?auto=compress&cs=tinysrgb&w=600",
-                    "https://images.pexels.com/photos/13791390/pexels-photo-13791390.jpeg?auto=compress&cs=tinysrgb&w=600"
-                ]
+                "name": $scope.commodityName,
+                "userID": $scope.userID,
+                "categoryID": $scope.categoryID,
+                "typeID": $scope.typeID,
+                "images": $scope.imageURLArray
             },
             "header": {
                 "Content-Type": "application/json"
