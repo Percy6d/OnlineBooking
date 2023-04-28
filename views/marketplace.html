@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="xui-d-grid xui-grid-col-1 xui-lg-grid-col-3 xui-grid-gap-1">
-        <div class="xui-bg-white xui-box-shadow-3 xui-bdr-rad-1 xui-p-half" ng-repeat="booking in bookings track by $index" ng-if="booking.id == selectCat.id || selectCat == null">
+        <div class="xui-bg-white xui-box-shadow-3 xui-bdr-rad-1 xui-p-half" ng-repeat="booking in bookings track by $index">
             <div class="xui-bg-sz-cover xui-bg-pos-center xui-w-fluid-100 xui-h-200 xui-bdr-rad-half" xui-bg-img="{{booking.commodity.images[0].url}}">
                 <a ng-click="showMP(booking.uid)" class="xui-d-block xui-w-fluid-100 xui-h-fluid-100" href="marketplace-details/{{booking.uid}}"></a>
             </div>
