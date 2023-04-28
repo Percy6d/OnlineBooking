@@ -91,6 +91,7 @@ app.controller("marketplace-controller", function($scope, $rootScope, $route, $t
     })
     .then((success) => {
         $scope.commodities = success.data;
+        console.log($scope.commodities);
         $timeout(() =>{
             xui.reveal.images();
             
@@ -163,7 +164,7 @@ app.controller("marketplace-details-controller", function($scope, $rootScope, $l
     $scope.bookData = {};
     $http({
         "method": "POST",
-        "url": "server/v1/bookings/fetch",
+        "url": "server/v1/commodities/fetch",
         "data": {
             "identifier": $routeParams.identifier
         },
@@ -172,8 +173,8 @@ app.controller("marketplace-details-controller", function($scope, $rootScope, $l
         }
     })
     .then((success) => {
-        $scope.bookingsDetails = success.data;
-        console.log($scope.bookingsDetails);
+        $scope.commodityDetails = success.data;
+        console.log($scope.commodityDetails);
         $timeout(() =>{
             xui.reveal.images();
             
@@ -228,12 +229,12 @@ app.controller("marketplace-details-controller", function($scope, $rootScope, $l
         if(tokenCookie === undefined || tokenCookie.length <= 2){
             alert("Please log in before creating a booking");
         } else {
-            $scope.bookData.commodityID = $scope.bookingsDetails.commodity.id;
+            $scope.bookData.commodityID = $scope.commodityDetails.id;
             $scope.bookData.userID = $rootScope.loggedInUser.id;
             const a = new Date($scope.bookData.dateFrom),
             b = new Date($scope.bookData.dateTo),
             difference = dateDiffInDays(a, b);
-            payWithPaystack($scope.bookingsDetails.commodity.price * difference);
+            payWithPaystack($scope.commodityDetails.price * difference);
         }
     }
 
