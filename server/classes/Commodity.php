@@ -46,12 +46,13 @@ class Commodity {
             $name = trim($obj->name);
         }
         try {
-            $query = $this->conn->prepare("INSERT INTO commodities (uid, name, userID, categoryID, typeID, timeCreated, timeUpdated) VALUES (:uid, :name, :userID, :categoryID, :typeID, :timeCreated, :timeUpdated)");
+            $query = $this->conn->prepare("INSERT INTO commodities (uid, name, userID, categoryID, typeID, price, timeCreated, timeUpdated) VALUES (:uid, :name, :userID, :categoryID, :typeID, :price, :timeCreated, :timeUpdated)");
             $query->bindParam(":uid", $uid);
             $query->bindParam(":name", $name);
             $query->bindParam(":userID", $obj->userID);
             $query->bindParam(":categoryID", $obj->categoryID);
             $query->bindParam(":typeID", $obj->typeID);
+            $query->bindParam(":price", $obj->price);
             $query->bindParam(":timeCreated", $dateTimeUTC);
             $query->bindParam(":timeUpdated", $dateTimeUTC);
             if($query->execute()){
@@ -169,7 +170,7 @@ class Commodity {
         $types = new Types();
         $users = new Users();
         try {
-            $query = $this->conn->prepare("SELECT * FROM commodities LIMIT 20");
+            $query = $this->conn->prepare("SELECT * FROM commodities LIMIT 20 ORDER BY id DESC");
             if($query->execute()){
                 if($query->rowCount() > 0){
                     $commodities = $query->fetchAll(PDO::FETCH_ASSOC);
