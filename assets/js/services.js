@@ -42,7 +42,7 @@ app.service("security", function($cookies, $location, $http){
         }
     }
 });
-app.service("fetches", function($rootScope, $http, $cookies, security){
+app.service("fetches", function($rootScope, $timeout, $http, $cookies, security){
     this.userDetails = function(){
         let tokenCookie = $cookies.get("bk-tokens", {path: '/'});
         if(tokenCookie === undefined){
@@ -58,6 +58,7 @@ app.service("fetches", function($rootScope, $http, $cookies, security){
                 }
             }).then((success) => {
                 let jwtData = success.data.data;
+                console.log(jwtData);
                 $http({
                     "method": "POST",
                     "url": "server/v1/users/details",
@@ -69,6 +70,27 @@ app.service("fetches", function($rootScope, $http, $cookies, security){
                     }
                 }).then((success) => {
                     $rootScope.loggedInUser = success.data;
+                    console.log($rootScope.loggedInUser);
+                    $http({
+                        "method": "POST",
+                        "url": "server/v1/bookings/user",
+                        "data": {
+                            "userID": $rootScope.loggedInUser.id
+                        },
+                        "header": {
+                            "Content-Type": "application/json"
+                        }
+                    })
+                    .then((success) => {
+                        console.log(success);
+                        $rootScope.getUserbookings = success.data;
+                        $timeout(() => {
+                            xui.reveal.images();
+                        })
+                        console.log($rootScope.getUserbookings);
+                    }, (error) => {
+                        console.log(error);
+                    });
                 }, (error) => {
                     // console.log(error.data);
                 });

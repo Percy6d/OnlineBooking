@@ -10,27 +10,13 @@
             </div>
         </div>
         <div class="links xui-pt-2">
-            <a href='./views/admin/' class="xui-text-inherit link-box ob-link-box xui-font-sz-90 xui-px-2 xui-opacity-6">
+            <a href='./host/overview' class="xui-text-inherit link-box ob-link-box xui-font-sz-90 xui-px-2 xui-bdr-rad-5">
                 <span>Overview</span>
             </a>
-            <a href='views/admin/categories' class="ob-link-box xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
-                <span>Categories</span>
-            </a>
-            <a href='views/admin/commodities' class="xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
+            <a href='host/commodities' class="active ob-link-box xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
                 <span>Commodities</span>
             </a>
-            <a href='views/admin/types' class="active xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
-                <span>Types</span>
-            </a> 
-            <a href='views/admin/users' class="xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
-                <span>Users</span>
-            </a> 
-            <a href='views/admin/bookings' class="xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
-                <span>Bookings</span>
-            </a>
-            <a href='views/admin/payment-history' class="xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
-                <span>Payment History</span>
-            </a> 
+            
             <div class="bottom-fixed xui-mt--5">
                 <a href='/' class="xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
                     <span>Logout</span>
@@ -62,20 +48,27 @@
             </nav>
             <section class="xui-mt-1 xui-pos-relative xui-px-3 xui-overflow-y-auto" style="height: 100%; min-height: 100vh;">
                 <div class="xui-d-grid xui-grid-col-1 xui-lg-grid-col-3 xui-grid-gap-1">
-                    <div class="xui-bg-white xui-box-shadow-3 xui-bdr-rad-1" ng-repeat="type in getAllTypes track by $index">
-                        <div class="xui-bg-sz-cover xui-bg-pos-center xui-w-fluid-100 xui-h-200 xui-bdr-rad-half"  xui-bg-img="{{category.imageURL}}">
+                    <div class="xui-bg-white xui-box-shadow-3 xui-bdr-rad-1" ng-repeat="commodity in getCommodities track by $index">
+                        <div class="xui-bg-sz-cover xui-bg-pos-center xui-w-fluid-100 xui-h-200 xui-bdr-rad-half"  xui-bg-img="{{commodity.images[0].url}}">
                             <div class="xui-py-1 xui-px-half xui-w-fluid-100 xui-h-fluid-100 xui-bg-black xui-opacity-6 xui-d-flex xui-flex-jc-center xui-flex-ai-center">
-                                <h2 class="xui-d-inline-block xui-font-sz-120 xui-font-w-bold xui-text-white">{{type.name}}</h2>
+                                <h2 class="xui-d-inline-block xui-font-sz-120 xui-font-w-bold xui-text-white">{{commodity.name}}</h2>
                             </div>
                         </div>
-                        <div class="xui-p-1 xui-d-grid xui-grid-col-2 xui-grid-gap-1">
-                            <button ng-click="deleteTypes(type.uid)" style="background: #000000;" class="xui-btn-block xui-text-white">Delete</button>
-                            <button style="background: #000000;" ng-click="showTypes(type)" xui-modal-open="editTypeModal" class="xui-btn-block xui-text-white">Edit</button>
+                        
+                        <div class="xui-p-1">
+                            <h3 class="xui-font-sz-90 xui-mb-1"><span class="xui-font-w-bold">Category</span> - <span class="xui-opacity-6 xui-font-sz-85">{{commodity.category.name}}</span></h3>
+                            <h3 class="xui-font-sz-90 xui-mb-1"><span class="xui-font-w-bold">Owner</span> - <span class="xui-opacity-6 xui-font-sz-85">{{commodity.user.emailAddress}}</span></h3>
+                            <div class="xui-d-grid xui-grid-col-3 xui-grid-gap-1">
+                                <button ng-click="verifyCommodities(commodity.uid)" style="background: #000000;" class="xui-btn-block xui-text-white">{{commodity.status == false ? 'Verify' : 'Verified'}}</button>
+                                <!-- <button ng-click="verifyCommodities(commodity.uid)" style="background: #000000;" class="xui-btn-block xui-text-white" ng-if="commodity.status == true">Verified</button> -->
+                                <button ng-click="flagCommodities(commodity.uid)" class="xui-btn xui-btn-danger xui-text-white" ng-if="commodity.status == true">Flag</button>
+                                <button style="background: #000000;" ng-click="deleteCommodities(commodity.uid)" xui-modal-open="editCategoriesModal" class="xui-btn-block xui-text-white">Delete</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             
-                <div xui-modal-open="addTypesModal" class=" xui-pos-fixed xui-w-50 xui-h-50 xui-bdr-rad-circle xui-cursor-pointer xui-d-flex xui-flex-jc-center xui-flex-ai-center" style="background: #000000; bottom: 150px; right: 30px;">
+                <div xui-modal-open="addCommoditiesModal" class=" xui-pos-fixed xui-w-50 xui-h-50 xui-bdr-rad-circle xui-cursor-pointer xui-d-flex xui-flex-jc-center xui-flex-ai-center" style="background: #000000; bottom: 150px; right: 30px;">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="#fff" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 4.16666V15.8333" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M4.16663 10H15.8333" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -83,20 +76,46 @@
                 </div>
             </section>
             
-            <section class="xui-modal" xui-modal="addTypesModal">
+            <section class="xui-modal" xui-modal="addCommoditiesModal">
                 <div class="xui-modal-content xui-bdr-rad-half" style="padding: 0;">
                 <div class="xui-py-1 xui-pl-half" style="background: #000000;">
-                    <h2 class="xui-font-w-normal xui-font-sz-100 xui-text-white">Add New Types</h2>
+                    <h2 class="xui-font-w-normal xui-font-sz-100 xui-text-white">Add New Commodities</h2>
                 </div>
-                <form class="xui-p-2" name="addTypesForm" novalidate>
+                <form class="xui-p-2" name="addCommoditiesForm" novalidate>
                     <div class="xui-mb-1">
-                        <label class="xui-opacity-5 xui-form-label xui-font-w-bold">Type</label>
-                        <input type="text" name="typename" ng-model="type.name" style="background: var(--primary-light-ii); padding: 1.2rem;" class="xui-bdr-rad-half xui-form-input xui-font-w-bold" required />
+                        <label class="xui-opacity-5 xui-form-label xui-font-w-bold">Commodity Name</label>
+                        <input type="text" name="categoryname" ng-model="cat.name" style="background: var(--primary-light-ii); padding: 1.2rem;" class="xui-bdr-rad-half xui-form-input xui-font-w-bold" required />
+                        
+                    </div>
+                    <div class="xui-mb-1">
+                        <label class="xui-opacity-5 xui-form-label xui-font-w-bold">Select a user</label>
+                        <select class="xui-form-select" name="" ng-model="selectUser" id="" ng-options="user as user.firstname for user in getUsers"></select>
+                    </div>
+
+                    <div class="xui-mb-1">
+                        <label class="xui-opacity-5 xui-form-label xui-font-w-bold">Select a category</label>
+                        <select class="xui-form-select" name="" ng-model="selectCategory" id="" ng-options="category as category.name for category in getCategories"></select>
+                    </div>
+
+                    <div class="xui-mb-1">
+                        <label class="xui-opacity-5 xui-form-label xui-font-w-bold">What type?</label>
+                        <select class="xui-form-select" name="" ng-model="selectType" id="" ng-options="type as type.name for type in getTypes"></select>
+                    </div>
+
+                    <div class="xui-mb-1">
+                        <div>
+                            <label class="xui-opacity-5 xui-form-label xui-font-w-bold">Enter an image URL</label>
+                            <input type="text" name="categoryname" ng-model="cat.name" style="background: var(--primary-light-ii); padding: 1.2rem;" class="xui-bdr-rad-half xui-form-input xui-font-w-bold" required />
+                            
+                        </div>
+                        <div class="xui-btn xui-text-white" style="background: #000;">Enter image URL</div>
+                        
                     </div>
               
                     <div class="xui-d-grid xui-grid-col-2 xui-grid-gap-2">
-                      <button class="xui-btn xui-bdr-rad-half xui-text-white" ng-click="addTypes()" style="background: #C05640;">
-                        Click to Add
+                      <button class="xui-btn xui-bdr-rad-half xui-text-white" ng-click="addCategoriesForm.$valid && addCategories()" style="background: #C05640;">
+                          <i ng-if="isCategoryDisabled" class="gg-spinner-alt xui-mx-auto xui-d-inline-block"></i>
+                          <span ng-if="!isCategoryDisabled">Click to Add</span>
                       </button>
                       <!-- <button type="submit" ng-click="addRoles()">add</button> -->
                       <button class="xui-btn xui-text-black xui-mr-1 xui-bdr-rad-half" xui-modal-close="addCategoriesModal" style="border: 1px solid lightgray;">Cancel</button>
@@ -107,29 +126,6 @@
                 
             </section>
 
-            <section class="xui-modal" xui-modal="editTypeModal">
-                <div class="xui-modal-content xui-bdr-rad-half" style="padding: 0;">
-                <div class="xui-py-1 xui-pl-half" style="background: #000000;">
-                    <h2 class="xui-font-w-normal xui-font-sz-100 xui-text-white">Edit</h2>
-                </div>
-                <form class="xui-p-2"  novalidate>
-                    <div class="xui-mb-1">
-                        <label class="xui-opacity-5 xui-form-label xui-font-w-bold">Type</label>
-                        <input type="text" name="typename" ng-model="typeName" style="background: var(--primary-light-ii); padding: 1.2rem;" class="xui-bdr-rad-half xui-form-input xui-font-w-bold"/>
-                    </div>
-              
-                    <div class="xui-d-grid xui-grid-col-2 xui-grid-gap-2">
-                      <button class="xui-btn xui-bdr-rad-half xui-text-white" ng-click="editTypes()" style="background: #C05640;">
-                        Click to Update
-                      </button>
-                      <!-- <button type="submit" ng-click="addRoles()">add</button> -->
-                      <button class="xui-btn xui-text-black xui-mr-1 xui-bdr-rad-half" xui-modal-close="editTypeModal" style="border: 1px solid lightgray;">Cancel</button>
-                    </div>
-                </form>
-                    
-                </div>
-                
-            </section>
 
             <!-- <button class="xui-btn xui-btn-blue xui-open-sidebar xui-mt-3">Click me</button> -->
         </section>

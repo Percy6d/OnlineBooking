@@ -49,12 +49,34 @@ app.config(($routeProvider, $locationProvider) => {
         templateUrl: "views/marketplace-details.html",
         controller: "marketplace-details-controller"
     })
+    .when("/host/overview", {
+        templateUrl: "views/host/overview.html",
+        controller: "host-overview-controller"
+        
+    })
+    .when("/host/commodities", {
+        templateUrl: "views/host/commodities.html",
+        controller: "host-commodities-controller"
+        
+    })
+
     .when("/dashboard/overview", {
         templateUrl: "views/dashboard/overview.html",
         controller: "dashboard-overview-controller",
         resolve: {
             "check": (security, fetches) => {
                 security.isLoggedIn();
+                security.refreshToken();
+                fetches.userDetails();
+            }
+        }
+    })
+
+    .when("/dashboard/bookings", {
+        templateUrl: "views/dashboard/bookings.html",
+        controller: "dashboard-bookings-controller",
+        resolve: {
+            "check": (security, fetches) => {
                 security.refreshToken();
                 fetches.userDetails();
             }

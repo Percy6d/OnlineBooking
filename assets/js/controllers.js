@@ -695,9 +695,96 @@ app.controller("dashboard-overview-controller", function($rootScope, $scope){
         $scope.isDisabled = true;
     }
 });
+app.controller("dashboard-bookings-controller", function($rootScope, $timeout, $http, $scope){
+    console.log($rootScope.loggedInUser);
+    $rootScope.pageTitle = "Bookings"
+    angular.element(document).ready(()=>{
+		xui.run();
+        
+	});
+});
+app.controller("host-overview-controller", function($rootScope, $timeout, $http, $scope){
+    $rootScope.pageTitle = "Bookings"
+    angular.element(document).ready(()=>{
+		xui.run();
+        
+	});
+});
+app.controller("host-commodities-controller", function($rootScope, $timeout, $http, $scope){
+    $rootScope.pageTitle = "Commodities";
+
+    $http({
+        "method": "GET",
+        "url": "server/v1/commodities/fetch-all",
+        "header": {
+            "Content-Type": "application/json"
+        }
+    })
+    .then((success) => {
+        console.log(success);
+        $scope.getCommodities = success.data;
+        console.log($scope.getCommodities);
+    }, (error) => {
+        console.log(error);
+    });
+
+    $http({
+        "method": "GET",
+        "url": "server/v1/categories/fetch-all",
+        "header": {
+            "Content-Type": "application/json"
+        }
+    })
+    .then((success) => {
+        console.log(success);
+        $scope.getCategories = success.data;
+        console.log($scope.getCategories);
+        $scope.selectCategory = $scope.getCategories[0];
+    }, (error) => {
+        console.log(error);
+    });
+
+    $http({
+        "method": "GET",
+        "url": "server/v1/types/fetch-all",
+        "header": {
+            "Content-Type": "application/json"
+        }
+    })
+    .then((success) => {
+        console.log(success);
+        $scope.getTypes = success.data;
+        console.log($scope.getTypes);
+        $scope.selectType = $scope.getTypes[0];
+    }, (error) => {
+        console.log(error);
+    });
+
+    $http({
+        "method": "GET",
+        "url": "server/v1/users/fetch-all",
+        "header": {
+            "Content-Type": "application/json"
+        }
+    })
+    .then((success) => {
+        console.log(success);
+        $scope.getUsers = success.data;
+        console.log($scope.getUsers);
+        $scope.selectUser = $scope.getUsers[0];
+    }, (error) => {
+        console.log(error);
+    });
+
+    angular.element(document).ready(()=>{
+		xui.run();
+        
+	});
+});
+
 app.controller("navbarCtrl", function($rootScope, $scope, $location){
     $scope.path = $location.path();
     $scope.MKPath = $rootScope.bookinguid;
-    console.log($scope.MKPath);
+    console.log($scope.path, $scope.MKPath);
 });
 

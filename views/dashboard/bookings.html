@@ -1,0 +1,105 @@
+<section class="xui-dashboard">
+    <div class="navigator xui-bg-white xui-px-1 disable-scrollbars">
+        <div class="brand xui-pt-2">
+            <div class="maxified xui-d-flex xui-flex-ai-center">
+                <a class='xui-text-inherit xui-text-dc-none' href="/">
+                    <div class='xui-pl-half'>
+                        <span class='xui-font-sz-110 xui-font-w-bold'>OnlineBooking</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="links xui-pt-2">
+            <a href='./dashboard/overview' class="xui-text-inherit link-box ob-link-box xui-font-sz-90 xui-px-2 xui-bdr-rad-5">
+                <span>Dashboard</span>
+            </a>
+            <a href='dashboard/bookings' class="active xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
+                <span>Bookings</span>
+            </a>
+            <!-- <a href='/wallet' class="xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
+                <span>Wallet</span>
+            </a> -->
+            <!-- <a href='/settings' class="xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
+                <span>Settings</span>
+            </a>  -->
+            <div class="bottom-fixed xui-mt--5">
+                <a href='/' class="xui-text-inherit link-box xui-font-sz-90 xui-opacity-6 xui-px-2">
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Screen -->
+    <div class="screen" xui-aside="true" xui-navbar="false">
+        <section class="content xui-px-1-half xui-lg-px-3">
+            <nav menu="2" class="xui-navbar xui-d-flex xui-flex-ai-center xui-flex-jc-space-between xui-bg-white xui-px-1-half xui-lg-px-none">
+                <div>
+                    <h1 class='xui-font-sz-150 xui-lg-font-sz-200 xui-font-w-bold'>{{pageTitle}}</h1>
+                </div>
+                <div class="xui-d-inline-flex xui-flex-ai-center">
+                    <a href="host/overview" class="xui-w-45 xui-h-45 xui-text-dc-none xui-flex-ai-center xui-flex-jc-center xui-mr-1 xui-bdr-rad-circle xui-bg-light xui-d-none xui-md-d-inline-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="xui-opacity-6" viewBox="0 0 24 24" width="16" height="16"><path fill="#000" d="M16.0503 12.0498L21 16.9996L16.0503 21.9493L14.636 20.5351L17.172 17.9988L4 17.9996V15.9996L17.172 15.9988L14.636 13.464L16.0503 12.0498ZM7.94975 2.0498L9.36396 3.46402L6.828 5.9988L20 5.99955V7.99955L6.828 7.9988L9.36396 10.5351L7.94975 11.9493L3 6.99955L7.94975 2.0498Z"></path></svg>
+                    </a>
+                    <div class="xui-w-45 xui-h-45 xui-flex-ai-center xui-flex-jc-center xui-mr-1 xui-bdr-rad-circle xui-bg-light xui-d-none xui-md-d-inline-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="xui-opacity-6" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M5 18H19V11.0314C19 7.14806 15.866 4 12 4C8.13401 4 5 7.14806 5 11.0314V18ZM12 2C16.9706 2 21 6.04348 21 11.0314V20H3V11.0314C3 6.04348 7.02944 2 12 2ZM9.5 21H14.5C14.5 22.3807 13.3807 23.5 12 23.5C10.6193 23.5 9.5 22.3807 9.5 21Z"></path></svg>
+                    </div>
+                    <div class="xui-w-50 xui-h-50 xui-bdr-rad-circle xui-bg-blue xui-bg-sz-cover xui-bg-pos-center" style="background-image: url('assets/images/user.png');"></div>
+                    <div class="menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </nav>
+            <div class="xui-d-grid xui-grid-col-2 xui-grid-gap-1">
+                <div class="xui-bg-white xui-box-shadow-3 xui-bdr-rad-1 xui-p-half xui-mt-3" ng-repeat="booking in getUserbookings">
+                    <div class="xui-bg-sz-cover xui-bg-pos-center xui-w-fluid-100 xui-h-200 xui-bdr-rad-half" xui-bg-img="{{booking.commodity.images[0].url}}">
+                    </div>
+                    <div class="xui-py-1 xui-px-half xui-d-grid xui-grid-col-2 xui-grid-gap-1">
+                        <div>
+                            <h3 class="xui-font-sz-95 xui-font-w-bold">Category</h3>
+                            <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{booking.commodity.category.name}}</span>
+                        </div>
+                        <div>
+                            <h3 class="xui-font-sz-95 xui-font-w-bold">Type</h3>
+                            <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{booking.commodity.type.name}}</span>
+                        </div>
+                        <div>
+                            <h3 class="xui-font-sz-95 xui-font-w-bold">User</h3>
+                            <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{booking.commodity.user.firstname}} {{booking.commodity.user.lastname}}</span>
+                        </div>
+                        <div>
+                            <h3 class="xui-font-sz-95 xui-font-w-bold">Status</h3>
+                            <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{booking.commodity.status == true ? 'Verified' : 'Not Verified'}}</span>
+                        </div>
+                        <!-- <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{booking.commodity.category.name}}</span>
+                        <h2 class="xui-font-sz-100 xui-lg-font-sz-120 xui-w-fluid-80">{{booking.commodity.name}}</h2>
+                        <h4 class="xui-mt-1-half xui-opacity-8 xui-font-sz-90 xui-font-w-normal">$100 per hour</h4> -->
+                    </div>
+                    <div class="xui-d-grid xui-grid-col-3 xui-grid-gap-1 xui-flex-ai-center">
+                        <h3 class="xui-font-sz-95 xui-font-w-bold">Date booked</h3>
+                        <div>
+                            <h3 class="xui-font-sz-95 xui-font-w-bold">From</h3>
+                            <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{booking.dateFrom | date}}</span>
+                        </div>
+                        
+                        <div>
+                            <h3 class="xui-font-sz-95 xui-font-w-bold">To</h3>
+                            <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{booking.dateTo | date}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="aside psc-bg-light-blue xui-py-2 xui-px-1-half xui-bg-white">
+                <div class="xui-bg-light-3 xui-p-1-half xui-bdr-rad-1" ng-if="loggedInUser.firstname != null && loggedInUser.lastname != null">
+                    <div class="xui-text-center">
+                        <div class="xui-w-100 xui-h-100 xui-bdr-rad-circle xui-bdr-1 xui-bdr-s-solid xui-bdr-blue xui-mx-auto xui-bg-sz-cover xui-bg-pos-center" style="background-image: url('assets/images/user.png');"></div>
+                        <h4 class="xui-font-sz-100 xui-mb-half xui-mt-1">{{loggedInUser.firstname}} {{loggedInUser.lastname}}</h4>
+                        <!-- <span class="xui-opacity-5">@richaadgigi</span> -->
+                        <a href="#" class="xui-btn-block xui-btn-blue xui-mt-1-half xui-bdr-rad-5">Visit profile</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+</section>

@@ -82,66 +82,6 @@
                     </div>
                 </div>
             
-                <div xui-modal-open="addCategoriesModal" class=" xui-pos-fixed xui-w-50 xui-h-50 xui-bdr-rad-circle xui-cursor-pointer xui-d-flex xui-flex-jc-center xui-flex-ai-center" style="background: #000000; bottom: 150px; right: 30px;">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#fff" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 4.16666V15.8333" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M4.16663 10H15.8333" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg> 
-                </div>
-            </section>
-            
-            <section class="xui-modal" xui-modal="addCategoriesModal">
-                <div class="xui-modal-content xui-bdr-rad-half" style="padding: 0;">
-                <div class="xui-py-1 xui-pl-half" style="background: #000000;">
-                    <h2 class="xui-font-w-normal xui-font-sz-100 xui-text-white">Add New Categories</h2>
-                </div>
-                <form class="xui-p-2" name="addCategoriesForm" novalidate>
-                    <div class="xui-mb-1">
-                        <label class="xui-opacity-5 xui-form-label xui-font-w-bold">Category Name</label>
-                        <input type="text" name="categoryname" ng-model="cat.name" style="background: var(--primary-light-ii); padding: 1.2rem;" class="xui-bdr-rad-half xui-form-input xui-font-w-bold" required />
-                        <div class="xui-d-inline-flex xui-flex-ai-center xui-text-danger xui-mt-half" ng-if="addCategoriesForm.$submitted && addCategoriesForm.rolename.$error.required">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><path fill="none" d="M0 0h24v24H0z"/><path fill="currentColor" d="M12.866 3l9.526 16.5a1 1 0 0 1-.866 1.5H2.474a1 1 0 0 1-.866-1.5L11.134 3a1 1 0 0 1 1.732 0zm-8.66 16h15.588L12 5.5 4.206 19zM11 16h2v2h-2v-2zm0-7h2v5h-2V9z"/></svg>
-                            <span class="xui-text-danger xui-d-block xui-ml-half xui-font-sz-75">This field is empty</span>
-                        </div>
-                    </div>
-              
-                    <div class="xui-d-grid xui-grid-col-2 xui-grid-gap-2">
-                      <button class="xui-btn xui-bdr-rad-half xui-text-white" ng-click="addCategoriesForm.$valid && addCategories()" style="background: #C05640;">
-                          <i ng-if="isCategoryDisabled" class="gg-spinner-alt xui-mx-auto xui-d-inline-block"></i>
-                          <span ng-if="!isCategoryDisabled">Click to Add</span>
-                      </button>
-                      <!-- <button type="submit" ng-click="addRoles()">add</button> -->
-                      <button class="xui-btn xui-text-black xui-mr-1 xui-bdr-rad-half" xui-modal-close="addCategoriesModal" style="border: 1px solid lightgray;">Cancel</button>
-                    </div>
-                </form>
-                    
-                </div>
-                
-            </section>
-
-            <section class="xui-modal" xui-modal="editCategoriesModal">
-                <div class="xui-modal-content xui-bdr-rad-half" style="padding: 0;">
-                <div class="xui-py-1 xui-pl-half" style="background: #000000;">
-                    <h2 class="xui-font-w-normal xui-font-sz-100 xui-text-white">Edit this category</h2>
-                </div>
-                <form class="xui-p-2" name="editCategoriesForm" novalidate>
-                    <div class="xui-mb-1">
-                        <label class="xui-opacity-5 xui-form-label xui-font-w-bold">Category Name</label>
-                        <input type="text" name="categoryname" ng-model="catName" style="background: var(--primary-light-ii); padding: 1.2rem;" class="xui-bdr-rad-half xui-form-input xui-font-w-bold"/>
-                    </div>
-              
-                    <div class="xui-d-grid xui-grid-col-2 xui-grid-gap-2">
-                      <button class="xui-btn xui-bdr-rad-half xui-text-white" ng-click="editCategories()" style="background: #C05640;">
-                          <i ng-if="isCategoryDisabled" class="gg-spinner-alt xui-mx-auto xui-d-inline-block"></i>
-                          <span ng-if="!isCategoryDisabled">Click to Update</span>
-                      </button>
-                      <!-- <button type="submit" ng-click="addRoles()">add</button> -->
-                      <button class="xui-btn xui-text-black xui-mr-1 xui-bdr-rad-half" xui-modal-close="addCategoriesModal" style="border: 1px solid lightgray;">Cancel</button>
-                    </div>
-                </form>
-                    
-                </div>
-                
             </section>
 
             <!-- <button class="xui-btn xui-btn-blue xui-open-sidebar xui-mt-3">Click me</button> -->
