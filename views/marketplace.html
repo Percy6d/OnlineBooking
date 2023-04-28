@@ -32,7 +32,7 @@
     <div class="xui-d-flex xui-flex-jc-space-between">
         <div class="xui-d-inline-flex xui-flex-ai-flex-end xui-mb-1">
             <span class="xui-font-sz-150 xui-lg-font-sz-250">Explore</span>
-            <span class="xui-opacity-5 xui-font-sz-85 xui-mb-half xui-ml-1">{{bookings.length}} items</span>
+            <span class="xui-opacity-5 xui-font-sz-85 xui-mb-half xui-ml-1">{{commodities.length}} items</span>
         </div>
         <div xui-modal-open="filterCategoryModal" class="xui-btn xui-cursor-pointer xui-d-flex xui-flex-ai-center xui-flex-jc-center" style="border: 1px solid lightgray; border-radius: 12px;">
             <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path d="M6.17 18a3.001 3.001 0 0 1 5.66 0H22v2H11.83a3.001 3.001 0 0 1-5.66 0H2v-2h4.17zm6-7a3.001 3.001 0 0 1 5.66 0H22v2h-4.17a3.001 3.001 0 0 1-5.66 0H2v-2h10.17zm-6-7a3.001 3.001 0 0 1 5.66 0H22v2H11.83a3.001 3.001 0 0 1-5.66 0H2V4h4.17zM9 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm6 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-6 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg> -->
@@ -50,8 +50,9 @@
     <div class="xui-d-grid xui-grid-col-1 xui-lg-grid-col-3 xui-grid-gap-1">
         <div class="xui-bg-white xui-box-shadow-3 xui-bdr-rad-1 xui-p-half" ng-repeat="commodity in commodities track by $index">
             <div class="xui-bg-sz-cover xui-bg-pos-center xui-w-fluid-100 xui-h-200 xui-bdr-rad-half" xui-bg-img="{{commodity.images[0].url}}">
-                <a ng-click="showMP(booking.uid)" class="xui-d-block xui-w-fluid-100 xui-h-fluid-100" href="marketplace-details/{{booking.uid}}"></a>
+                <a ng-click="showMP(commodity.uid)" class="xui-d-block xui-w-fluid-100 xui-h-fluid-100" href="marketplace-details/{{commodity.uid}}"></a>
             </div>
+            <h1 class="xui-mt-2">{{commodity.name}}</h1>
             <div class="xui-py-1 xui-px-half xui-d-grid xui-grid-col-2 xui-grid-gap-1">
                 <div>
                     <h3 class="xui-font-sz-95 xui-font-w-bold">Category</h3>
