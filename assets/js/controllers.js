@@ -100,6 +100,54 @@ app.controller("marketplace-controller", function($scope, $rootScope, $route, $t
         console.log(error);
     });
 
+    $scope.showMP = (MKUID) => {
+        $rootScope.bookinguid = MKUID;
+        console.log($rootScope.bookinguid);
+    }
+
+    $http({
+        "method": "GET",
+        "url": "server/v1/categories/fetch-all",
+        "header": {
+            "Content-Type": "application/json"
+        }
+    })
+    .then((success) => {
+        $scope.categories = success.data;
+        console.log($scope.categories);
+        $scope.selectCategory = $scope.categories[0];
+    }, (error) => {
+        console.log(error);
+    });
+    
+    $scope.filterCategory = (selectCat) => {
+        console.log(selectCat);
+        $http({
+            "method": "GET",
+            "url": "server/v1/bookings/fetch-all",
+            "header": {
+                "Content-Type": "application/json"
+            }
+        })
+        .then((success) => {
+            $scope.bookings = success.data;
+            for(let i=0; i < $scope.bookings.length; i++){
+                if(selectCat.id == $scope.bookings[i].commodity.category.id){
+                    $scope.bookings[i] = $scope.selectCat;
+                    console.log("Yes");
+                    // console.log($scope.bookings[i]);
+                }
+                else{
+                    console.log("No");
+                }
+                
+            }
+        }, (error) => {
+            console.log(error);
+        });
+
+    }
+
     angular.element(document).ready(()=>{
 		xui.run();
 	});
@@ -620,5 +668,7 @@ app.controller("dashboard-overview-controller", function($rootScope, $scope){
 });
 app.controller("navbarCtrl", function($rootScope, $scope, $location){
     $scope.path = $location.path();
+    $scope.MKPath = $rootScope.bookinguid;
+    console.log($scope.MKPath);
 });
 
