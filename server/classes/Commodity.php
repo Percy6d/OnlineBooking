@@ -266,7 +266,8 @@ class Commodity {
     }
     function getAllCommodityImages($commodityID){
         try {
-            $query = $this->conn->prepare("SELECT * FROM commodities_images");
+            $query = $this->conn->prepare("SELECT * FROM commodities_images WHERE commodityID = :commodityID");
+            $query->bindParam(":commodityID", $commodityID);
             if($query->execute()){
                 if($query->rowCount() > 0){
                     $commodityImages = $query->fetchAll(PDO::FETCH_ASSOC);

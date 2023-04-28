@@ -84,14 +84,13 @@ app.controller("login-controller", function($rootScope, $scope, $http, $cookies,
 app.controller("marketplace-controller", function($scope, $rootScope, $route, $timeout, $http){
     $http({
         "method": "GET",
-        "url": "server/v1/bookings/fetch-all",
+        "url": "server/v1/commodities/fetch-all",
         "header": {
             "Content-Type": "application/json"
         }
     })
     .then((success) => {
-        $scope.bookings = success.data;
-        console.log($scope.bookings);
+        $scope.commodities = success.data;
         $timeout(() =>{
             xui.reveal.images();
             
