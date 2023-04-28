@@ -565,6 +565,28 @@ app.controller("users-controller", function($scope, $rootScope, $route, $timeout
 	});
 })
 
+app.controller("payment-history-controller", function($scope, $rootScope, $route, $timeout, $http){
+    $rootScope.pageTitle = "Payment History";
+    $http({
+        "method": "GET",
+        "url": "server/v1/payment-history/fetch-all",
+        "header": {
+            "Content-Type": "application/json"
+        }
+    })
+    .then((success) => {
+        console.log(success);
+        $scope.paymentHistory = success.data;
+        console.log($scope.paymentHistory);
+    }, (error) => {
+        console.log(error);
+    });
+
+    angular.element(document).ready(()=>{
+		xui.run();
+	});
+})
+
 app.controller("bookings-controller", function($scope, $rootScope, $route, $timeout, $http){
     $rootScope.pageTitle = "Bookings";
     $http({
