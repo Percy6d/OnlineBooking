@@ -11,14 +11,14 @@ class Category {
         $this->connectDB = $connectDB;
         $this->conn = $connectDB->connect();
     }
-    function newCategory($name){
+    function newCategory($obj){
         $generatedUID = new UIDGenerator();
         $dateTimeGenerate = new DateTimeGenerator();
         $uid = $generatedUID->getUID(20, null);
         $dateTimeUTC = $dateTimeGenerate->toUTC();
         // Trimming name before inserting to DB
-        $name = trim(ucfirst(strtolower($name)));
-        $imageURL = null;
+        $name = trim(ucfirst(strtolower($obj->name)));
+        $imageURL = $obj->url;
         try {
             $query = $this->conn->prepare("INSERT INTO categories (uid, name, imageURL, timeCreated, timeUpdated) VALUES (:uid, :name, :imageURL, :timeCreated, :timeUpdated)");
             $query->bindParam(":uid", $uid);
