@@ -121,6 +121,7 @@ app.controller("marketplace-controller", function($scope, $rootScope, $route, $t
     });
     
     $scope.filterCategory = (selectCat) => {
+        xui.modal.hide("filterCategoryModal");
         console.log(selectCat);
         $http({
             "method": "GET",
@@ -137,7 +138,7 @@ app.controller("marketplace-controller", function($scope, $rootScope, $route, $t
                     
                     $timeout(() =>{
                         xui.reveal.images();
-                        xui.modal.hide("filterCategoryModal");
+                        
                     })
                     console.log("Yes");
                     // console.log($scope.bookings[i]);

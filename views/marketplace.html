@@ -60,10 +60,9 @@
                     <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{booking.commodity.user.firstname}} {{booking.commodity.user.lastname}}</span>
                 </div>
                 <div>
-                    <h3 class="xui-font-sz-95 xui-font-w-bold">Date Booked</h3>
-                    <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">From {{booking.dateFrom | date}} To {{booking.dateTo | date}}</span>
+                    <h3 class="xui-font-sz-95 xui-font-w-bold">Status</h3>
+                    <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{booking.commodity.status == true ? 'Verified' : 'Not Verified'}}</span>
                 </div>
-                
                 <!-- <span class="xui-d-inline-block xui-font-sz-80 xui-font-w-bold xui-opacity-5">{{booking.commodity.category.name}}</span>
                 <h2 class="xui-font-sz-100 xui-lg-font-sz-120 xui-w-fluid-80">{{booking.commodity.name}}</h2>
                 <h4 class="xui-mt-1-half xui-opacity-8 xui-font-sz-90 xui-font-w-normal">$100 per hour</h4> -->
