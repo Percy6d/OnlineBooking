@@ -58,12 +58,6 @@
                         <div class="xui-p-1">
                             <h3 class="xui-font-sz-90 xui-mb-1"><span class="xui-font-w-bold">Category</span> - <span class="xui-opacity-6 xui-font-sz-85">{{commodity.category.name}}</span></h3>
                             <h3 class="xui-font-sz-90 xui-mb-1"><span class="xui-font-w-bold">Owner</span> - <span class="xui-opacity-6 xui-font-sz-85">{{commodity.user.emailAddress}}</span></h3>
-                            <div class="xui-d-grid xui-grid-col-3 xui-grid-gap-1">
-                                <button ng-click="verifyCommodities(commodity.uid)" style="background: #000000;" class="xui-btn-block xui-text-white">{{commodity.status == false ? 'Verify' : 'Verified'}}</button>
-                                <!-- <button ng-click="verifyCommodities(commodity.uid)" style="background: #000000;" class="xui-btn-block xui-text-white" ng-if="commodity.status == true">Verified</button> -->
-                                <button ng-click="flagCommodities(commodity.uid)" class="xui-btn xui-btn-danger xui-text-white" ng-if="commodity.status == true">Flag</button>
-                                <button style="background: #000000;" ng-click="deleteCommodities(commodity.uid)" xui-modal-open="editCategoriesModal" class="xui-btn-block xui-text-white">Delete</button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,7 +78,7 @@
                 <form class="xui-p-2" name="addCommoditiesForm" novalidate>
                     <div class="xui-mb-1">
                         <label class="xui-opacity-5 xui-form-label xui-font-w-bold">Commodity Name</label>
-                        <input type="text" name="categoryname" ng-model="commodityName" style="background: var(--primary-light-ii); padding: 1.2rem;" class="xui-bdr-rad-half xui-form-input xui-font-w-bold" required />
+                        <input type="text" name="commodityname" ng-model="commodityName" style="background: var(--primary-light-ii); padding: 1.2rem;" class="xui-bdr-rad-half xui-form-input xui-font-w-bold" required />
                         
                     </div>
                     <div class="xui-mb-1">
@@ -103,6 +97,12 @@
                     </div>
 
                     <div class="xui-mb-1">
+                        <label class="xui-opacity-5 xui-form-label xui-font-w-bold">Price</label>
+                        <input type="text" name="commodityprice" ng-model="commodityPrice" style="background: var(--primary-light-ii); padding: 1.2rem;" class="xui-bdr-rad-half xui-form-input xui-font-w-bold" required />
+                        
+                    </div>
+
+                    <div class="xui-mb-1">
                         <div ng-repeat="image in imageURLArray track by $index">
                             <label class="xui-opacity-5 xui-form-label xui-font-w-bold">image URL</label>
                             <input type="text" name="categoryname" ng-model="image" style="background: var(--primary-light-ii); padding: 1.2rem;" class="xui-bdr-rad-half xui-form-input xui-font-w-bold"/>
@@ -114,7 +114,7 @@
                     </div>
               
                     <div class="xui-d-grid xui-grid-col-2 xui-grid-gap-2">
-                      <button class="xui-btn xui-bdr-rad-half xui-text-white" ng-click="addCommodity(commodityName, selectUser.id, selectCategory.id, selectType.id)" style="background: #C05640;">
+                      <button class="xui-btn xui-bdr-rad-half xui-text-white" ng-click="addCommodity(commodityName, selectUser.id, selectCategory.id, selectType.id, commodityPrice)" style="background: #C05640;">
                         <span>Click to Add</span>
                       </button>
                       <!-- <button type="submit" ng-click="addRoles()">add</button> -->

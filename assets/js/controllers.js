@@ -839,14 +839,14 @@ app.controller("host-commodities-controller", function($rootScope, $route, $time
         console.log($scope.imageURLArray);
     };
 
-    $scope.addCommodity = (commodityname, userid, categoryid, typeid) => {
+    $scope.addCommodity = (commodityname, userid, categoryid, typeid, commodityprice) => {
         $scope.commodityName = commodityname;
         $scope.categoryID = categoryid;
         $scope.userID = userid;
         $scope.typeID = typeid;
+        $scope.commodityPrice = commodityprice;
 
-
-        console.log($scope.commodityName, $scope.categoryID, $scope.userID, $scope.typeID);
+        console.log($scope.commodityName, $scope.categoryID, $scope.userID, $scope.typeID, $scope.commodityPrice);
         $http({
             "method": "POST",
             "url": "server/v1/commodities/create-new",
@@ -855,6 +855,7 @@ app.controller("host-commodities-controller", function($rootScope, $route, $time
                 "userID": $scope.userID,
                 "categoryID": $scope.categoryID,
                 "typeID": $scope.typeID,
+                "price": $scope.commodityPrice,
                 "images": $scope.imageURLArray
             },
             "header": {
