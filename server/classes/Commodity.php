@@ -170,7 +170,7 @@ class Commodity {
         $types = new Types();
         $users = new Users();
         try {
-            $query = $this->conn->prepare("SELECT * FROM commodities LIMIT 20 ORDER BY id DESC");
+            $query = $this->conn->prepare("SELECT * FROM commodities ORDER BY id DESC LIMIT 20");
             if($query->execute()){
                 if($query->rowCount() > 0){
                     $commodities = $query->fetchAll(PDO::FETCH_ASSOC);
